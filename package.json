@@ -1,0 +1,32 @@
+{
+  "name": "redondo",
+  "version": "1.0.0",
+  "description": "Viewer library for 360-degree equirectangular panoramic photos Edit",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nvaldes/redondo.js.git"
+  },
+  "keywords": [
+    "panorama",
+    "360",
+    "equirectangular",
+    "viewer"
+  ],
+  "author": "Noriel Valdes",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/nvaldes/redondo.js/issues"
+  },
+  "homepage": "https://github.com/nvaldes/redondo.js",
+  "dependencies": {
+    "babylonjs": "~3.0.7",
+    "hammerjs": "^2.0.8"
+  },
+  "devDependencies": {
+    "webpack": "^3.5.5"
+  }
+}
