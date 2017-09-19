@@ -29,7 +29,7 @@ window.redondo = function(config) {
 
         // This creates a basic Babylon Scene object (non-mesh)
         var scene = new BABYLON.Scene(engine);
-        scene.zoomState = 1;
+        scene.zoomState = -5;
         scene.zoomSpeed = 0.05;
         scene.pause = true;
         scene.dragging = false;
@@ -37,7 +37,7 @@ window.redondo = function(config) {
         // Create camera
         var camera = new BABYLON.ArcRotateCamera("Cam_Base", 0.01, 0, 0, new BABYLON.Vector3(0.01, 0, 0), scene);
         camera.setPosition(new BABYLON.Vector3.Zero());
-        camera.fov = 1;
+        camera.fov = scene.zoomState;
         camera.lowerRadiusLimit = 0.02;
         camera.upperRadiusLimit = 0.01;
         camera.angularSensibilityX = 3000;
