@@ -28,7 +28,7 @@
     var camera, scene, renderer;
     var isUserInteracting = false,
     onMouseDownMouseX = 0, onMouseDownMouseY = 0,
-    lon = 0, onMouseDownLon = 0,
+    lon = 180, onMouseDownLon = 0,
     lat = 0, onMouseDownLat = 0,
     phi = 0, theta = 0;
     init();
@@ -51,6 +51,9 @@
       } );
       mesh = new THREE.Mesh( geometry, material );
       scene.add( mesh );
+
+      var sonar = new THREE.PlaneBufferGeometry(500, 500);
+
       renderer = new THREE.WebGLRenderer();
       renderer.setPixelRatio( window.devicePixelRatio );
       renderer.setSize( window.innerWidth, window.innerHeight );
