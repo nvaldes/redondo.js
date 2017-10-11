@@ -1,52 +1,55 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Babylon.js sample code</title>
-        <style>
-            html, body {
-                width: 100%;
-                height: 100%;
-                margin: 0;
-                padding: 0;
-                background-color: #000;
-            }
-            #heroCanvasZone {
-                width: 100%;
-                height: 100%;
-            }
-            #heroRenderCanvas {
-                width: 100%;
-                height: 100%;
-            }
-        </style>
-        <style>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Babylon.js sample code</title>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+        }
+
+        #heroCanvasZone {
+            width: 100%;
+            height: 100%;
+        }
+
+        #heroRenderCanvas {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <style>
         .jm-sonar-icon {
-          display: inline-block;
-          font-size: 0px;
-          cursor: pointer;
-          margin: 2%;
-          width: 17px;
-          height: 17px;
-          border-radius: 50%;
-          text-align: center;
-          position: relative;
-          z-index: 1;
-          color: #fff;
+            display: inline-block;
+            font-size: 0px;
+            cursor: pointer;
+            margin: 2%;
+            width: 17px;
+            height: 17px;
+            border-radius: 50%;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            color: #fff;
         }
 
         .jm-sonar-icon:after {
-          pointer-events: none;
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          border-radius: 50%;
-          content: '';
-          -webkit-box-sizing: content-box;
-          -moz-box-sizing: content-box;
-          box-sizing: content-box;
+            pointer-events: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            content: '';
+            -webkit-box-sizing: content-box;
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
         }
-
         /*.jm-sonar-icon:before {
           font-family: 'ecoicon';
           speak: none;
@@ -61,23 +64,23 @@
         }*/
 
         .jm-sonar-one .jm-sonar-icon {
-                background: rgba(255,255,255, 1);
-                -webkit-transition: -webkit-transform ease-out 0.1s, background 0.2s;
-                -moz-transition: -moz-transform ease-out 0.1s, background 0.2s;
-                transition: transform ease-out 0.1s, background 0.2s;
+            background: rgba(255, 255, 255, 1);
+            -webkit-transition: -webkit-transform ease-out 0.1s, background 0.2s;
+            -moz-transition: -moz-transform ease-out 0.1s, background 0.2s;
+            transition: transform ease-out 0.1s, background 0.2s;
         }
 
         .jm-sonar-one .jm-sonar-icon:after {
-                top: 0;
-                left: 0;
-                padding: 0;
-                z-index: -1;
-                box-shadow: 0 0 0 2px rgba(255,255,255,1);
-                opacity: 0;
-                -webkit-transform: scale(0.9);
-                -moz-transform: scale(0.9);
-                -ms-transform: scale(0.9);
-                transform: scale(0.9);
+            top: 0;
+            left: 0;
+            padding: 0;
+            z-index: -1;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 1);
+            opacity: 0;
+            -webkit-transform: scale(0.9);
+            -moz-transform: scale(0.9);
+            -ms-transform: scale(0.9);
+            transform: scale(0.9);
         }
         /*.jm-sonar-one{
         position: absolute;
@@ -85,190 +88,313 @@
             left: 30%;
         }*/
 
-
         .jm-sonar-one .jm-sonar-icon:after {
-                -webkit-animation: sonar-one 1.3s ease-out 75ms;
-                -moz-animation: sonar-one 1.3s ease-out 75ms;
-                animation: sonar-one 1.3s ease-out 75ms;
-        -webkit-animation-duration: 5s;
-              -webkit-animation-iteration-count: infinite;
-              -webkit-animation-timing-function: linear;
-              -webkit-animation-delay: 0s;
+            -webkit-animation: sonar-one 1.3s ease-out 75ms;
+            -moz-animation: sonar-one 1.3s ease-out 75ms;
+            animation: sonar-one 1.3s ease-out 75ms;
+            -webkit-animation-duration: 5s;
+            -webkit-animation-iteration-count: infinite;
+            -webkit-animation-timing-function: linear;
+            -webkit-animation-delay: 0s;
         }
 
         @-webkit-keyframes sonar-one {
-          0% {
-            opacity: 0.3;
-          }
-          40% {
-            opacity: 0.5;
-            box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255,255,255,0.5);
-          }
-          100% {
-            box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255,255,255,0.5);
-            -webkit-transform: scale(1.5);
-            opacity: 0;
-          }
+            0% {
+                opacity: 0.3;
+            }
+            40% {
+                opacity: 0.5;
+                box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255, 255, 255, 0.5);
+            }
+            100% {
+                box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255, 255, 255, 0.5);
+                -webkit-transform: scale(1.5);
+                opacity: 0;
+            }
         }
+
         @-moz-keyframes sonar-one {
-          0% {
-            opacity: 0.3;
-          }
-          40% {
-            opacity: 0.5;
-            box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255,255,255,0.5);
-          }
-          100% {
-            box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255,255,255,0.5);
-            -moz-transform: scale(1.5);
-            opacity: 0;
-          }
+            0% {
+                opacity: 0.3;
+            }
+            40% {
+                opacity: 0.5;
+                box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255, 255, 255, 0.5);
+            }
+            100% {
+                box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255, 255, 255, 0.5);
+                -moz-transform: scale(1.5);
+                opacity: 0;
+            }
         }
+
         @keyframes sonar-one {
-          0% {
-            opacity: 0.3;
-          }
-          40% {
-            opacity: 0.5;
-            box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255,255,255,0.5);
-          }
-          100% {
-            box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255,255,255,0.5);
-            transform: scale(1.5);
-            opacity: 0;
-          }
+            0% {
+                opacity: 0.3;
+            }
+            40% {
+                opacity: 0.5;
+                box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255, 255, 255, 0.5);
+            }
+            100% {
+                box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255, 255, 255, 0.5);
+                transform: scale(1.5);
+                opacity: 0;
+            }
         }
-        </style>
-    </head>
+    </style>
+    <style>
+        .jm-sample-background {
+            padding: 15% 0;
+            background: grey;
+            position: relative;
+        }
+
+        .jm-360-info-card {
+            position: absolute;
+            background: white;
+            padding: 2%;
+        }
+
+        article.jm-360-info-card h3 {
+            margin: 0;
+            font-size: 1.4em;
+            letter-spacing: 0.03em;
+            font-weight: normal;
+        }
+        a.jm-360-info-card-close {
+          position: absolute;
+          top: -10px;
+          left: -10px;
+          background: #fff;
+          border: solid 1px #999;
+          border-radius: 50% 50%;
+          color: #333;
+          text-decoration: none;
+          min-width: 20px;
+          min-height: 20px;
+          text-align: center;
+        }
+    </style>
+</head>
+
 <body>
-<div id="container">
-</div>
-<script src="dist/bundle.js"></script>
-<script>
+    <div id="container">
+    </div>
+    <script src="dist/bundle.js"></script>
+    <script>
         var camera, scene, renderer;
-      var geometry, material, mesh;
-      var target = new THREE.Vector3();
-      var lon = 90, lat = 0;
-      var phi = 0, theta = 0;
-      var touchX, touchY;
-      init();
-      animate();
-      function init() {
-        camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 1000 );
-        scene = new THREE.Scene();
-        var sides = [
-          {
-            url: 'assets/face-r.jpg',
-            position: [ -1022, 0, 0 ],
-            rotation: [ 0, Math.PI / 2, 0 ]
-          },
-          {
-            url: 'assets/face-l.jpg',
-            position: [ 1022, 0, 0 ],
-            rotation: [ 0, -Math.PI / 2, 0 ]
-          },
-          {
-            url: 'assets/face-t.jpg',
-            position: [ 0,  1022, 0 ],
-            rotation: [ Math.PI / 2, 0, Math.PI ]
-          },
-          {
-            url: 'assets/face-d.jpg',
-            position: [ 0, -1022, 0 ],
-            rotation: [ - Math.PI / 2, 0, Math.PI ]
-          },
-          {
-            url: 'assets/face-f.jpg',
-            position: [ 0, 0,  1022 ],
-            rotation: [ 0, Math.PI, 0 ]
-          },
-          {
-            url: 'assets/face-b.jpg',
-            position: [ 0, 0, -1022 ],
-            rotation: [ 0, 0, 0 ]
+        var geometry, material, mesh;
+        var target = new THREE.Vector3();
+        var lon = 90,
+            lat = 0;
+        var phi = 0,
+            theta = 0;
+        var touchX, touchY;
+        var mouseMoved = false;
+        var links = {
+              demo1:  {
+                content: '<h1>DEMO 1</h1><h2>Subtext</h2>',
+                position: [1000, -50, 150],
+                rotation: [0, Math.PI / -2, 0]
+              },
+              demo2:  {
+                content: '<h1>DEMO 2</h1><h2>Subtext</h2><a href="google.com">this is a link</a>',
+                position: [-150, -50, 1000],
+                rotation: [0,  Math.PI, 0]
+              }
+            };
+        var sides = [{
+                    url: 'assets/face-r.png',
+                    position: [-1022, 0, 0],
+                    rotation: [0, Math.PI / 2, 0]
+                },
+                {
+                    url: 'assets/face-l.png',
+                    position: [1022, 0, 0],
+                    rotation: [0, -Math.PI / 2, 0]
+                },
+                {
+                    url: 'assets/face-t.png',
+                    position: [0, 1022, 0],
+                    rotation: [Math.PI / 2, 0, Math.PI]
+                },
+                {
+                    url: 'assets/face-d.png',
+                    position: [0, -1022, 0],
+                    rotation: [-Math.PI / 2, 0, Math.PI]
+                },
+                {
+                    url: 'assets/face-f.png',
+                    position: [0, 0, 1022],
+                    rotation: [0, Math.PI, 0]
+                },
+                {
+                    url: 'assets/face-b.png',
+                    position: [0, 0, -1022],
+                    rotation: [0, 0, 0]
+                }
+            ];
+        var imagesLoaded = 0;
+        function imageLoader() {
+          imagesLoaded++;
+          console.log(imagesLoaded);
+          if (imagesLoaded === sides.length) {
+            //kill loading animation
           }
-        ];
-        var sonarElement = document.createElement("div");
-        sonarElement.className = 'jm-sonar-one';
-        sonarElement.innerHTML = '<a class="jm-sonar-icon"></a>';
-        var sonar = new THREE.CSS3DObject(sonarElement);
-        sonar.position.fromArray( [ 1000, -50, 150 ] );
-        sonar.rotation.fromArray( [ 0, Math.PI/2, 0 ] );
-        scene.add(sonar);
+        }
+        init();
+        animate();
 
-        for ( var i = 0; i < sides.length; i ++ ) {
-          var side = sides[ i ];
-          var element = document.createElement( 'img' );
-          element.width = 2048;
-          element.src = side.url;
-          var object = new THREE.CSS3DObject( element );
-          object.position.fromArray( side.position );
-          object.rotation.fromArray( side.rotation );
-          scene.add( object );
+        function init() {
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+            scene = new THREE.Scene();
+            
+            
+
+            Object.keys(links).forEach(function(k) {
+              var sonarElement = document.createElement('div');
+              sonarElement.onclick = function(e) {
+                var cardElement = document.createElement('article');
+                cardElement.id = k + '_card';
+                cardElement.className = 'jm-360-info-card'
+                cardElement.innerHTML = links[k].content;
+                var closeLink = document.createElement('a');
+                closeLink.className = "jm-360-info-card-close";
+                closeLink.innerHTML = "&times;";
+                closeLink.href = '#';
+                closeLink.onclick = function(e) {
+                  e.preventDefault();
+                  var curr = scene.getObjectByName(k + '_card');
+                  scene.remove(curr);
+                };
+                cardElement.appendChild(closeLink);
+                var card = new THREE.CSS3DObject(cardElement);
+                card.name = k + '_card';
+                card.position.fromArray(links[k].position);
+                card.rotation.fromArray(links[k].rotation);
+                scene.add(card);
+              };
+              sonarElement.className = 'jm-sonar-one';
+              sonarElement.innerHTML = '<a id="' + k + '" class="jm-sonar-icon"></a>';
+              var sonar = new THREE.CSS3DObject(sonarElement);
+              sonar.position.fromArray(links[k].position);
+              sonar.rotation.fromArray(links[k].rotation);
+              scene.add(sonar);
+            });
+
+            var loader = new THREE.ImageLoader();
+            for (var i = 0; i < sides.length; i++) {
+              var side = sides[i];
+              // loader.load(
+              //   side.url,
+              //   function(img){
+              //     img.width = 2048;
+              //     var object = new THREE.CSS3DObject(img);
+              //     object.position.fromArray(side.position);
+              //     object.rotation.fromArray(side.rotation);
+              //     scene.add(object);
+              //     imagesLoaded++;
+              //     if (imagesLoaded == sides.length) {
+              //       console.warn('loading complete, handle it.');
+              //     }
+              //   }
+              // );
+              var element = document.createElement('img');
+              element.onload = imageLoader();
+              element.width = 2048;
+              element.src = side.url;
+              var object = new THREE.CSS3DObject(element);
+              object.position.fromArray(side.position);
+              object.rotation.fromArray(side.rotation);
+              scene.add(object);
+            }
+
+
+
+            renderer = new THREE.CSS3DRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.domElement.id = 'redondo';
+            document.body.appendChild(renderer.domElement);
+            //
+            document.addEventListener('mousedown', onDocumentMouseDown, false);
+            document.addEventListener('wheel', onDocumentMouseWheel, false);
+            document.addEventListener('touchstart', onDocumentTouchStart, false);
+            document.addEventListener('touchmove', onDocumentTouchMove, false);
+            window.addEventListener('resize', onWindowResize, false);
         }
 
-        
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
 
-        renderer = new THREE.CSS3DRenderer();
-        renderer.setSize( window.innerWidth, window.innerHeight );
-        document.body.appendChild( renderer.domElement );
-        //
-        document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-        document.addEventListener( 'wheel', onDocumentMouseWheel, false );
-        document.addEventListener( 'touchstart', onDocumentTouchStart, false );
-        document.addEventListener( 'touchmove', onDocumentTouchMove, false );
-        window.addEventListener( 'resize', onWindowResize, false );
-      }
-      function onWindowResize() {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize( window.innerWidth, window.innerHeight );
-      }
-      function onDocumentMouseDown( event ) {
-        event.preventDefault();
-        document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-        document.addEventListener( 'mouseup', onDocumentMouseUp, false );
-      }
-      function onDocumentMouseMove( event ) {
-        var movementX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
-        var movementY = event.movementY || event.mozMovementY || event.webkitMovementY || 0;
-        lon -= movementX * 0.1;
-        lat += movementY * 0.1;
-      }
-      function onDocumentMouseUp( event ) {
-        document.removeEventListener( 'mousemove', onDocumentMouseMove );
-        document.removeEventListener( 'mouseup', onDocumentMouseUp );
-      }
-      function onDocumentMouseWheel( event ) {
-        camera.fov += event.deltaY * 0.05;
-        camera.updateProjectionMatrix();
-      }
-      function onDocumentTouchStart( event ) {
-        event.preventDefault();
-        var touch = event.touches[ 0 ];
-        touchX = touch.screenX;
-        touchY = touch.screenY;
-      }
-      function onDocumentTouchMove( event ) {
-        event.preventDefault();
-        var touch = event.touches[ 0 ];
-        lon -= ( touch.screenX - touchX ) * 0.1;
-        lat += ( touch.screenY - touchY ) * 0.1;
-        touchX = touch.screenX;
-        touchY = touch.screenY;
-      }
-      function animate() {
-        requestAnimationFrame( animate );
-        lon +=  0;
-        lat = Math.max( - 85, Math.min( 85, lat ) );
-        phi = THREE.Math.degToRad( 90 - lat );
-        theta = THREE.Math.degToRad( lon );
-        target.x = Math.sin( phi ) * Math.cos( theta );
-        target.y = Math.cos( phi );
-        target.z = Math.sin( phi ) * Math.sin( theta );
-        camera.lookAt( target );
-        renderer.render( scene, camera );
-      }
-</script>
+        function onDocumentMouseDown(event) {
+            event.preventDefault();
+            document.addEventListener('mousemove', onDocumentMouseMove, false);
+            document.addEventListener('mouseup', onDocumentMouseUp, false);
+            mouseMoved = false;
+        }
+
+        function onDocumentMouseMove(event) {
+            var movementX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
+            var movementY = event.movementY || event.mozMovementY || event.webkitMovementY || 0;
+            lon -= movementX * 0.1;
+            lat += movementY * 0.1;
+            mouseMoved = true;
+        }
+
+        function onDocumentMouseUp(event) {
+            document.removeEventListener('mousemove', onDocumentMouseMove);
+            document.removeEventListener('mouseup', onDocumentMouseUp);
+            if (event.target.tagName === 'A') {
+              event.stopPropagation();
+              console.log(event);
+            } else if (!mouseMoved) {
+              Object.keys(links).forEach(function(k) {
+                scene.remove(scene.getObjectByName(k + '_card'));
+              });
+            }
+        }
+
+        function onDocumentMouseWheel(event) {
+          var newFOV = camera.fov + event.deltaY * 0.05;
+          if (newFOV > 30 && newFOV < 90) {
+            camera.fov += event.deltaY * 0.05;
+            camera.updateProjectionMatrix();
+          }
+        }
+
+        function onDocumentTouchStart(event) {
+            event.preventDefault();
+            var touch = event.touches[0];
+            touchX = touch.screenX;
+            touchY = touch.screenY;
+        }
+
+        function onDocumentTouchMove(event) {
+            event.preventDefault();
+            var touch = event.touches[0];
+            lon -= (touch.screenX - touchX) * 0.1;
+            lat += (touch.screenY - touchY) * 0.1;
+            touchX = touch.screenX;
+            touchY = touch.screenY;
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            lon += 0;
+            lat = Math.max(-85, Math.min(85, lat));
+            phi = THREE.Math.degToRad(90 - lat);
+            theta = THREE.Math.degToRad(lon);
+            target.x = Math.sin(phi) * Math.cos(theta);
+            target.y = Math.cos(phi);
+            target.z = Math.sin(phi) * Math.sin(theta);
+            camera.lookAt(target);
+            renderer.render(scene, camera);
+        }
+    </script>
 </body>
+
 </html>
