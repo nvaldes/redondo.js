@@ -4,27 +4,31 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Babylon.js sample code</title>
-    <style>
-        html,
-        body {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            background-color: #000;
+   <style>
+.jm-360-outcards{
+  display: none;
+}
+.jm-taraa{
+  display: block;
+}
+#redondo_container{
+  position: relative;
+}
+.jm-360-outcards{
+  position: absolute;
+  top: 0;
+  width: auto;
+  z-index: 9999;
+      background: white;
+      text-align: center;
+      padding: 2% 3%;
+      left: 50%;
+      margin-left: -6%;
+      top: 32%;
+}
+        #redondo_container img {
+          max-width: none;
         }
-
-        #heroCanvasZone {
-            width: 100%;
-            height: 100%;
-        }
-
-        #heroRenderCanvas {
-            width: 100%;
-            height: 100%;
-        }
-    </style>
-    <style>
         .jm-sonar-icon {
             display: inline-block;
             font-size: 0px;
@@ -50,18 +54,7 @@
             -moz-box-sizing: content-box;
             box-sizing: content-box;
         }
-        /*.jm-sonar-icon:before {
-          font-family: 'ecoicon';
-          speak: none;
-          font-size: 48px;
-          line-height: 90px;
-          font-style: normal;
-          font-weight: normal;
-          font-variant: normal;
-          text-transform: none;
-          display: block;
-          -webkit-font-smoothing: antialiased;
-        }*/
+
 
         .jm-sonar-one .jm-sonar-icon {
             background: rgba(255, 255, 255, 1);
@@ -82,11 +75,7 @@
             -ms-transform: scale(0.9);
             transform: scale(0.9);
         }
-        /*.jm-sonar-one{
-        position: absolute;
-            top: 65%;
-            left: 30%;
-        }*/
+
 
         .jm-sonar-one .jm-sonar-icon:after {
             -webkit-animation: sonar-one 1.3s ease-out 75ms;
@@ -97,7 +86,15 @@
             -webkit-animation-timing-function: linear;
             -webkit-animation-delay: 0s;
         }
-
+        .jm-360-info-card{
+          -webkit-animation: fade-in-cards 1.3s;
+          -moz-animation: fade-in-cards 1.3s;
+          animation: fade-in-cards 1.3s;
+        }
+        @-webkit-keyframes fade-in-cards {
+          0%   { opacity: 0; }
+          100% { opacity: : 1; }
+        }
         @-webkit-keyframes sonar-one {
             0% {
                 opacity: 0.3;
@@ -152,8 +149,9 @@
 
         .jm-360-info-card {
             position: absolute;
-            background: white;
-            padding: 2%;
+            background: rgba(255,255,255, 0.9);
+            padding: 1.4% 1.5%;
+            text-align: center;
         }
 
         article.jm-360-info-card h3 {
@@ -165,7 +163,7 @@
         a.jm-360-info-card-close {
           position: absolute;
           top: -10px;
-          left: -10px;
+          right: -10px;
           background: #fff;
           border: solid 1px #999;
           border-radius: 50% 50%;
@@ -175,66 +173,188 @@
           min-height: 20px;
           text-align: center;
         }
+
     </style>
 </head>
 
 <body>
-    <div id="container">
+    
+    <div id="redondo_container">
+
+      <article class= "jm-360-outcards" id="card_BeltRobeHim">
+        <h3>Gifts for Him <b>up to 65% off</b></h3>
+        <p class='content-block-content__action content-block-content__action--dark-text'>
+        <a class='text' href='https://www.c21stores.com/categories/gifts-for-him' target='_blank'>SHOP ALL</a></p>
+      </article>
+
+    <p class= "jm-360-outcards" id="card_MenScarves">BeltRobeHim2</p>
+
     </div>
     <script src="dist/bundle.js"></script>
     <script>
+        $ = document.querySelectorAll;
         var camera, scene, renderer;
         var geometry, material, mesh;
         var target = new THREE.Vector3();
-        var lon = 90,
+        var lon = -90,
             lat = 0;
         var phi = 0,
             theta = 0;
         var touchX, touchY;
         var mouseMoved = false;
+
         var links = {
-              demo1:  {
-                content: '<h1>DEMO 1</h1><h2>Subtext</h2>',
-                position: [1000, -50, 150],
-                rotation: [0, Math.PI / -2, 0]
-              },
-              demo2:  {
-                content: '<h1>DEMO 2</h1><h2>Subtext</h2><a href="google.com">this is a link</a>',
-                position: [-150, -50, 1000],
-                rotation: [0,  Math.PI, 0]
-              }
-            };
-        var sides = [{
-                    url: 'assets/face-r.png',
-                    position: [-1022, 0, 0],
-                    rotation: [0, Math.PI / 2, 0]
-                },
-                {
-                    url: 'assets/face-l.png',
-                    position: [1022, 0, 0],
-                    rotation: [0, -Math.PI / 2, 0]
-                },
-                {
-                    url: 'assets/face-t.png',
-                    position: [0, 1022, 0],
-                    rotation: [Math.PI / 2, 0, Math.PI]
-                },
-                {
-                    url: 'assets/face-d.png',
-                    position: [0, -1022, 0],
-                    rotation: [-Math.PI / 2, 0, Math.PI]
-                },
-                {
-                    url: 'assets/face-f.png',
-                    position: [0, 0, 1022],
-                    rotation: [0, Math.PI, 0]
-                },
-                {
-                    url: 'assets/face-b.png',
-                    position: [0, 0, -1022],
-                    rotation: [0, 0, 0]
-                }
-            ];
+          // MEN PLANE
+          //position: [1000, -459, 67],
+          //rotation: [0, Math.PI / -2, 0]
+
+          Menwatches:  {
+            content:  "<h3>Men's Watches <b>over 50% off</b></h3>"+
+                      "<p class='content-block-content__action content-block-content__action--dark-text'>"+
+                      "<a class='text' href='https://www.c21stores.com/categories/men-watches' target='_blank'>SHOP ALL</a></p>",
+            position: [1000, -459, 67],
+            rotation: [0, Math.PI / -2, 0]
+          },
+          MenScarves:  {
+            content:  "<h3>Men's Hats, Scarves & Gloves <b>over 60% off</h3>"+
+                      "<p class='content-block-content__action content-block-content__action--dark-text'>"+
+                      "<a class='text' href='https://www.c21stores.com/categories/men-hats-scarves-gloves' target='_blank'>SHOP ALL</a></p>",
+            position: [1000, -751, 228],
+            rotation: [0, Math.PI / -2, 0]
+          },
+          BeatsHeadphones:  {
+            content:  "<h3>Tech Gifts <b>over 50% off</b></h3>"+
+                      "<p class='content-block-content__action content-block-content__action--dark-text'>"+
+                      "<a class='text' href='https://www.c21stores.com/categories/gifts-tech' target='_blank'>SHOP ALL</a></p>",
+            position: [1000, 226, -76],
+            rotation: [0, Math.PI / -2, 0]
+          },
+          BeltRobeHim: {
+            content:  "<h3>Gifts for Him <b>up to 65% off</b></h3>"+
+                      "<p class='content-block-content__action content-block-content__action--dark-text'>"+
+                      "<a class='text' href='https://www.c21stores.com/categories/gifts-for-him' target='_blank'>SHOP ALL</a></p>",
+            position: [1000, -289, 527],
+            rotation: [0, Math.PI / -2, 0]
+          },
+          FragranceHim: {
+            content:  "<h3>Men's Fragrances <b>over 50% off</b></h3>"+
+                      "<p class='content-block-content__action content-block-content__action--dark-text'>"+
+                      "<a class='text' href='https://www.c21stores.com/categories/beauty-mens-fragrances' target='_blank'>SHOP ALL</a></p>",
+            position: [1000, -647, -787],
+            rotation: [0, Math.PI / -2, 0]
+          },
+          TieHim: {
+            content:  "<h3>Ties <b>over 75% off</b></h3>"+
+                      "<p class='content-block-content__action content-block-content__action--dark-text'>"+
+                      "<a class='text' href='https://www.c21stores.com/categories/men-ties' target='_blank'>SHOP ALL</a></p>",
+            position: [1000, -547, -787],
+            rotation: [0, Math.PI / -2, 0]
+          },
+
+          // BOYS PLANE
+          //position: [481, -125, 1000],
+          //rotation: [0,  Math.PI, 0]
+          GraySweaterHim: {
+            content:  "<h3>Men's Cashmere <b>over 65% off</b></h3>"+
+                      "<p class='content-block-content__action content-block-content__action--dark-text'>"+
+                      "<a class='text' href='https://www.c21stores.com/categories/new-now-men-cashmere' target='_blank'>SHOP ALL</a></p>",
+            position: [835, -670, 1000],
+            rotation: [0,  Math.PI, 0]
+          },
+          SuitBoy: {
+            content:  "<h3>Boys Special Occasion <b>over 55% off</b></h3>"+
+                      "<p class='content-block-content__action content-block-content__action--dark-text'>"+
+                      "<a class='text' href='https://www.c21stores.com/categories/kids-party-perfect?kids_category%5B%5D=boys+8+to+20&kids_category%5B%5D=boys+shoes&kids_category%5B%5D=boys+4+to+7&kids_category%5B%5D=infant+boy&kids_category%5B%5D=toddler+boy' target='_blank'>SHOP ALL</a></p>",
+            position: [102, -191, 1000],
+            rotation: [0,  Math.PI, 0]
+          },
+          ScooterBoy: {
+            content:  "<h3>Gifts for Kids <b>up to 65% off</b></h3>"+
+                      "<p class='content-block-content__action content-block-content__action--dark-text'>"+
+                      "<a class='text' href='https://www.c21stores.com/categories/gifts-for-kids' target='_blank'>SHOP ALL</a></p>",
+            position: [481, -125, 1000],
+            rotation: [0, Math.PI, 0]
+          },
+
+          //WOMEN PLANE
+          //position: [481, -125, 1000],
+          //rotation: [0,  Math.PI, 0]
+
+          NecklaceWomen: {
+            content:  "<h3>Jewelry <b>up to 50% off</b></h3>"+
+                      "<p class='content-block-content__action content-block-content__action--dark-text'>"+
+                      "<a class='text' href='https://www.c21stores.com/categories/handbags-accessories-shop-all-jewelry' target='_blank'>SHOP ALL</a></p>",
+            position: [-304, -53, -1000],
+            rotation: [Math.PI, Math.PI, Math.PI]
+          },
+          RedSweaterWomen: {
+            content:  "<h3>Gifts For Her <b>up to 65% off</b></h3>"+
+                      "<p class='content-block-content__action content-block-content__action--dark-text'>"+
+                      "<a class='text' href='https://www.c21stores.com/categories/gifts-for-her' target='_blank'>SHOP ALL</a></p>",
+            position: [-461, -303, -1000],
+            rotation: [Math.PI, Math.PI, Math.PI]
+          },
+
+
+          //CELING PLANE
+          //position: [0, 1000, 0],
+          //rotation: [Math.PI/ 2,0  , 0]
+
+          //FLOOR PLANE
+          //position: [0, 1000, 0],
+          //rotation: [Math.PI/ 2,0  , 0]
+
+          // GIRL PLANE
+          //position: [ 0, -1000, 0 ],
+          //rotation: [-Math.PI/2, 0, 0]
+
+          testing: {
+            content:  "<h3>testing testing<b>testing</b></h3>"+
+                      "<p class='content-block-content__action content-block-content__action--dark-text'>"+
+                      "<a class='text' href='https://www.c21stores.com/categories/handbags-accessories-shop-all-jewelry' target='_blank'>SHOP ALL</a></p>",
+            position: [-1000, -751, 228],
+            rotation: [0, Math.PI /2, 0]
+          }
+
+        };
+
+            var sides = [{
+                        //GIRL
+                        url: 'http://redondo.supraluminal.io/assets/face-r.png',
+                        position: [-1022, 0, 0],
+                        rotation: [0, -Math.PI / 2, 0]
+                    },
+                    {
+                        //MEN
+                        url: 'http://redondo.supraluminal.io/assets/face-l.png',
+                        position: [1022, 0, 0],
+                        rotation: [0, Math.PI / 2, 0]
+                    },
+                    {
+                        //CEALING
+                        url: 'http://redondo.supraluminal.io/assets/face-t.png',
+                        position: [0, 1022, 0],
+                        rotation: [-Math.PI / 2, 0, Math.PI]
+                    },
+                    {
+                        //FLOOR
+                        url: 'http://redondo.supraluminal.io/assets/face-d.png',
+                        position: [0, -1022, 0],
+                        rotation: [Math.PI / 2, 0, Math.PI]
+                    },
+                    {
+                        //BOY
+                        url: 'http://redondo.supraluminal.io/assets/face-b.png',
+                        position: [0, 0, 1022],
+                        rotation: [0, 0, 0]
+                    },
+                    {
+                        url: 'http://redondo.supraluminal.io/assets/face-f.png',
+                        position: [0, 0, -1022],
+                        rotation: [0, -Math.PI, 0]
+                    }
+                ];
+
         var imagesLoaded = 0;
         function imageLoader() {
           imagesLoaded++;
@@ -249,43 +369,55 @@
         function init() {
             camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
             scene = new THREE.Scene();
-            
-            
+
+
 
             Object.keys(links).forEach(function(k) {
-              var sonarElement = document.createElement('div');
-              sonarElement.onclick = function(e) {
-                var cardElement = document.createElement('article');
-                cardElement.id = k + '_card';
-                cardElement.className = 'jm-360-info-card'
-                cardElement.innerHTML = links[k].content;
-                var closeLink = document.createElement('a');
-                closeLink.className = "jm-360-info-card-close";
-                closeLink.innerHTML = "&times;";
-                closeLink.href = '#';
-                closeLink.onclick = function(e) {
-                  e.preventDefault();
-                  var curr = scene.getObjectByName(k + '_card');
-                  scene.remove(curr);
+                var sonarElement = document.createElement('div');
+                sonarElement.onclick = function(e) {
+                  var cardElement = document.createElement('article');
+                  cardElement.id = k + '_card';
+                  cardElement.className = 'jm-360-info-card'
+                  cardElement.innerHTML = links[k].content;
+                  var closeLink = document.createElement('a');
+                  closeLink.className = "jm-360-info-card-close";
+                  closeLink.innerHTML = "&times;";
+                  closeLink.href = '#';
+                  closeLink.onclick = function(e) {
+                    e.preventDefault();
+                    var curr = scene.getObjectByName(k + '_card');
+                    scene.remove(curr);
+                  };
+                  cardElement.appendChild(closeLink);
+
+                  var card = new THREE.CSS3DObject(cardElement);
+                  card.name = k + '_card';
+                  card.position.fromArray(links[k].position);
+                  card.rotation.fromArray(links[k].rotation);
+
+                  //card.lookAt(camera.position + 100);
+                  card.quaternion.equals(camera.quaternion );
+                  scene.add(card);
+                  getClickPosition();
+
+
                 };
-                cardElement.appendChild(closeLink);
-                var card = new THREE.CSS3DObject(cardElement);
-                card.name = k + '_card';
-                card.position.fromArray(links[k].position);
-                card.rotation.fromArray(links[k].rotation);
-                scene.add(card);
-              };
-              sonarElement.className = 'jm-sonar-one';
-              sonarElement.innerHTML = '<a id="' + k + '" class="jm-sonar-icon"></a>';
-              var sonar = new THREE.CSS3DObject(sonarElement);
-              sonar.position.fromArray(links[k].position);
-              sonar.rotation.fromArray(links[k].rotation);
-              scene.add(sonar);
+                sonarElement.className = 'jm-sonar-one';
+                sonarElement.innerHTML = '<a id="' + k + '" onclick="newcard('+ k +')" class="jm-sonar-icon"></a>';
+                var sonar = new THREE.CSS3DObject(sonarElement);
+                sonar.position.fromArray(links[k].position);
+                sonar.rotation.fromArray(links[k].rotation);
+                scene.add(sonar);
+
+
             });
 
             var loader = new THREE.ImageLoader();
             for (var i = 0; i < sides.length; i++) {
               var side = sides[i];
+
+
+              //THIS
               // loader.load(
               //   side.url,
               //   function(img){
@@ -300,6 +432,9 @@
               //     }
               //   }
               // );
+              //END THIS
+
+
               var element = document.createElement('img');
               element.onload = imageLoader();
               element.width = 2048;
@@ -315,7 +450,7 @@
             renderer = new THREE.CSS3DRenderer();
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.domElement.id = 'redondo';
-            document.body.appendChild(renderer.domElement);
+            document.getElementById('redondo_container').appendChild(renderer.domElement);
             //
             document.addEventListener('mousedown', onDocumentMouseDown, false);
             document.addEventListener('wheel', onDocumentMouseWheel, false);
@@ -362,7 +497,7 @@
           var newFOV = camera.fov + event.deltaY * 0.05;
           if (newFOV > 30 && newFOV < 90) {
             camera.fov += event.deltaY * 0.05;
-            camera.updateProjectionMatrix();
+            //camera.updateProjectionMatrix();
           }
         }
 
@@ -382,6 +517,28 @@
             touchY = touch.screenY;
         }
 
+        // Follows the mouse event
+        function onMouseMove(event) {
+
+            // Update the mouse variable
+            event.preventDefault();
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+
+         // Make the sphere follow the mouse
+          var vector = new THREE.Vector3(mouse.x, mouse.y, 0.5);
+            vector.unproject( camera );
+            var dir = vector.sub( camera.position ).normalize();
+            var distance = - camera.position.z / dir.z;
+            var pos = camera.position.clone().add( dir.multiplyScalar( distance ) );
+            mouseMesh.position.copy(pos);
+
+            // Make the sphere follow the mouse
+        //  mouseMesh.position.set(event.clientX, event.clientY, 0);
+        };
+
+
+
         function animate() {
             requestAnimationFrame(animate);
             lon += 0;
@@ -393,6 +550,16 @@
             target.z = Math.sin(phi) * Math.sin(theta);
             camera.lookAt(target);
             renderer.render(scene, camera);
+        }
+
+        function newcard(k){
+          document.getElementById('card_'+k.id).classList.add('jm-taraa');
+        }
+
+        function getClickPosition(e) {
+            var xPosition = e.clientX;
+            var yPosition = e.clientY;
+            console.console.log(xPosition + ' - ' + xPosition);
         }
     </script>
 </body>
