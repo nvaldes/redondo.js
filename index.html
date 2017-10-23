@@ -374,39 +374,40 @@
 
             Object.keys(links).forEach(function(k) {
                 var sonarElement = document.createElement('div');
-                sonarElement.onclick = function(e) {
-                  var cardElement = document.createElement('article');
-                  cardElement.id = k + '_card';
-                  cardElement.className = 'jm-360-info-card'
-                  cardElement.innerHTML = links[k].content;
-                  var closeLink = document.createElement('a');
-                  closeLink.className = "jm-360-info-card-close";
-                  closeLink.innerHTML = "&times;";
-                  closeLink.href = '#';
-                  closeLink.onclick = function(e) {
-                    e.preventDefault();
-                    var curr = scene.getObjectByName(k + '_card');
-                    scene.remove(curr);
-                  };
-                  cardElement.appendChild(closeLink);
+                // sonarElement.onclick = function(e) {
+                //   var cardElement = document.createElement('article');
+                //   cardElement.id = k + '_card';
+                //   cardElement.className = 'jm-360-info-card'
+                //   cardElement.innerHTML = links[k].content;
+                //   var closeLink = document.createElement('a');
+                //   closeLink.className = "jm-360-info-card-close";
+                //   closeLink.innerHTML = "&times;";
+                //   closeLink.href = '#';
+                //   closeLink.onclick = function(e) {
+                //     e.preventDefault();
+                //     var curr = scene.getObjectByName(k + '_card');
+                //     scene.remove(curr);
+                //   };
+                //   cardElement.appendChild(closeLink);
 
-                  var card = new THREE.CSS3DObject(cardElement);
-                  card.name = k + '_card';
-                  card.position.fromArray(links[k].position);
-                  card.rotation.fromArray(links[k].rotation);
+                //   var card = new THREE.CSS3DObject(cardElement);
+                //   card.name = k + '_card';
+                //   card.position.fromArray(links[k].position);
+                //   card.rotation.fromArray(links[k].rotation);
 
-                  //card.lookAt(camera.position + 100);
-                  card.quaternion.equals(camera.quaternion );
-                  scene.add(card);
-                  getClickPosition();
+                //   //card.lookAt(camera.position + 100);
+                //   card.quaternion.equals(camera.quaternion );
+                //   scene.add(card);
+                //   getClickPosition();
 
 
-                };
+                // };
                 sonarElement.className = 'jm-sonar-one';
                 sonarElement.innerHTML = '<a id="' + k + '" onclick="newcard('+ k +')" class="jm-sonar-icon"></a>';
                 var sonar = new THREE.CSS3DObject(sonarElement);
                 sonar.position.fromArray(links[k].position);
-                sonar.rotation.fromArray(links[k].rotation);
+                //sonar.rotation.fromArray(links[k].rotation);
+                sonar.lookAt(camera.position);
                 scene.add(sonar);
 
 
@@ -552,8 +553,13 @@
             renderer.render(scene, camera);
         }
 
-        function newcard(k){
-          document.getElementById('card_'+k.id).classList.add('jm-taraa');
+        function newcard(k) {
+            var card = document.getElementById('card_'+k.id);
+            card.classList.add('jm-taraa');
+            card.style.top = (event.clientY - (card.offsetHeight / 2)) + 'px';
+            card.style.left = event.clientX + 'px';
+            
+            
         }
 
         function getClickPosition(e) {
