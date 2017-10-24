@@ -4,7 +4,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Babylon.js sample code</title>
-   <style>
+    <link rel="stylesheet" media="all" href="https://c21stores-weblinc.netdna-ssl.com/assets/weblinc/store_front/application-bd59fc1803ada49e8d79913b6ee8ee78a6b5169455902e60099f80dab2f8b313.css">
+
+<style>
 .jm-360-outcards{
   display: none;
 }
@@ -26,8 +28,8 @@
       margin-left: -6%;
       top: 32%;
 }
-        #redondo_container img {
-          max-width: none;
+  #redondo_container img {
+      max-width: none;
         }
         .jm-sonar-icon {
             display: inline-block;
@@ -61,6 +63,7 @@
             -webkit-transition: -webkit-transform ease-out 0.1s, background 0.2s;
             -moz-transition: -moz-transform ease-out 0.1s, background 0.2s;
             transition: transform ease-out 0.1s, background 0.2s;
+            opacity: 0.75;
         }
 
         .jm-sonar-one .jm-sonar-icon:after {
@@ -86,7 +89,7 @@
             -webkit-animation-timing-function: linear;
             -webkit-animation-delay: 0s;
         }
-        .jm-360-info-card{
+        .jm-360-outcards{
           -webkit-animation: fade-in-cards 1.3s;
           -moz-animation: fade-in-cards 1.3s;
           animation: fade-in-cards 1.3s;
@@ -147,18 +150,21 @@
             position: relative;
         }
 
-        .jm-360-info-card {
+        .jm-360-outcards {
             position: absolute;
-            background: rgba(255,255,255, 0.9);
+            background: rgba(255,255,255, 0.75);
             padding: 1.4% 1.5%;
             text-align: center;
         }
 
-        article.jm-360-info-card h3 {
-            margin: 0;
+        article.jm-360-outcards h3 {
+            margin: 0% 0 3%;
             font-size: 1.4em;
             letter-spacing: 0.03em;
             font-weight: normal;
+        }
+        article div{
+          position: relative;
         }
         a.jm-360-info-card-close {
           position: absolute;
@@ -178,16 +184,31 @@
 </head>
 
 <body>
-    
+
     <div id="redondo_container">
 
       <article class= "jm-360-outcards" id="card_BeltRobeHim">
         <h3>Gifts for Him <b>up to 65% off</b></h3>
         <p class='content-block-content__action content-block-content__action--dark-text'>
         <a class='text' href='https://www.c21stores.com/categories/gifts-for-him' target='_blank'>SHOP ALL</a></p>
+        <a class="jm-360-info-card-close" onclick="closeCardsSingle(this);" href="#">×</a>
       </article>
 
-    <p class= "jm-360-outcards" id="card_MenScarves">BeltRobeHim2</p>
+      <article class= "jm-360-outcards" id="card_MenScarves">
+        <h3>Men’s Hats, Scarves &amp; Gloves <b>Over 60% Off</b></h3>
+        <p class='content-block-content__action content-block-content__action--dark-text'>
+        <a class='text' href='https://www.c21stores.com/categories/men-hats-scarves-gloves' target='_blank'>SHOP ALL</a></p>
+        <a class="jm-360-info-card-close" onclick="closeCardsSingle(this);" href="#">×</a>
+      </article>
+
+      <article class= "jm-360-outcards" id="card_MenScarves">
+        <h3>Men’s Watches <b>Over 50% Off</b></h3>
+        <p class='content-block-content__action content-block-content__action--dark-text'>
+        <a class='text' href='https://www.c21stores.com/categories/men-hats-scarves-gloves' target='_blank'>SHOP ALL</a></p>
+        <a class="jm-360-info-card-close" onclick="closeCardsSingle(this);" href="#">×</a>
+      </article>
+
+
 
     </div>
     <script src="dist/bundle.js"></script>
@@ -377,10 +398,10 @@
                 // sonarElement.onclick = function(e) {
                 //   var cardElement = document.createElement('article');
                 //   cardElement.id = k + '_card';
-                //   cardElement.className = 'jm-360-info-card'
+                //   cardElement.className = 'jm-360-outcards'
                 //   cardElement.innerHTML = links[k].content;
                 //   var closeLink = document.createElement('a');
-                //   closeLink.className = "jm-360-info-card-close";
+                //   closeLink.className = "jm-360-outcards-close";
                 //   closeLink.innerHTML = "&times;";
                 //   closeLink.href = '#';
                 //   closeLink.onclick = function(e) {
@@ -440,12 +461,13 @@
               element.onload = imageLoader();
               element.width = 2048;
               element.src = side.url;
+              element.setAttribute("onclick", "closeCards();");
               var object = new THREE.CSS3DObject(element);
               object.position.fromArray(side.position);
               object.rotation.fromArray(side.rotation);
               scene.add(object);
-            }
 
+            }
 
 
             renderer = new THREE.CSS3DRenderer();
@@ -553,13 +575,30 @@
             renderer.render(scene, camera);
         }
 
+
         function newcard(k) {
             var card = document.getElementById('card_'+k.id);
+
             card.classList.add('jm-taraa');
-            card.style.top = (event.clientY - (card.offsetHeight / 2)) + 'px';
+            //card.style.top = (event.clientY - (card.offsetHeight / 2) - card.offsetHeight/2) + 'px';
+            //card.style.left = event.clientX + 'px' ;
+
+            var Viewwer_Height = document.documentElement.clientHeight;
+            var Viewwer_Width = document.documentElement.clientWidth;
+            var Card_Height = document.getElementById('card_'+k.id).offsetHeight;
+            var Card_Width = document.getElementById('card_'+k.id).offsetWidth;
+
+
+            console.log(event.clientX + " + " +event.clientY);
+            console.log(Viewwer_Width + " + " + Viewwer_Height);
+            console.log(Card_Width + " + " + Card_Height);
+            //card.style.top = (event.clientY - (card.offsetHeight / 2) - card.offsetHeight/2) + 'px';
+            //card.style.left = event.clientX + 'px' ;
+
+            card.style.top = event.clientY + 'px';
             card.style.left = event.clientX + 'px';
-            
-            
+
+
         }
 
         function getClickPosition(e) {
@@ -567,6 +606,26 @@
             var yPosition = e.clientY;
             console.console.log(xPosition + ' - ' + xPosition);
         }
+
+        function closeCards(e){
+          var cardout = document.getElementsByClassName('jm-360-outcards');
+          //cardout.style.display = 'none';
+          for (var i=0;i<cardout.length;i+=1){
+            cardout[i].classList.remove('jm-taraa');
+          }
+        }
+
+        function closeCardsSingle(k){
+          var parentk = k.parentElement;
+          parentk.classList.remove('jm-taraa');
+        }
+
+
+        //$("img").click(function(){
+          //$('.jm-360-outcards').removeClass('jm-taraa');
+          //console.log('image!');
+        //});
+
     </script>
 </body>
 
