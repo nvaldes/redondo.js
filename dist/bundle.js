@@ -112,7 +112,7 @@ window.redondo = function(config) {
         // Create camera
         var camera = new __WEBPACK_IMPORTED_MODULE_0_babylonjs___default.a.ArcRotateCamera("Cam_Base", 0.01, 0, 0, new __WEBPACK_IMPORTED_MODULE_0_babylonjs___default.a.Vector3(0.01, 0, 0), scene);
         camera.setPosition(new __WEBPACK_IMPORTED_MODULE_0_babylonjs___default.a.Vector3.Zero());
-        camera.fov = 1;
+        camera.fov = scene.zoomState;
         camera.lowerRadiusLimit = 0.02;
         camera.upperRadiusLimit = 0.01;
         camera.angularSensibilityX = 3000;
@@ -178,7 +178,7 @@ window.redondo = function(config) {
     var scene = createScene();
 
     engine.runRenderLoop(function () {
-        scene.activeCamera.alpha -= (0.0005 * scene.activeCamera.fov * scene.pause);
+        scene.activeCamera.alpha -= (0.000125 * scene.activeCamera.fov * scene.pause);
         if (scene.zoomState > scene.activeCamera.fov.toFixed(2)) {
             scene.activeCamera.fov += scene.zoomSpeed;
             scene.activeCamera.angularSensibilityX = (3000 / scene.activeCamera.fov);

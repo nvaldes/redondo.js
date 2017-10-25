@@ -29,7 +29,7 @@ window.redondo = function(config) {
 
         // This creates a basic Babylon Scene object (non-mesh)
         var scene = new BABYLON.Scene(engine);
-        scene.zoomState = -5;
+        scene.zoomState = 1;
         scene.zoomSpeed = 0.05;
         scene.pause = true;
         scene.dragging = false;
@@ -103,7 +103,7 @@ window.redondo = function(config) {
     var scene = createScene();
 
     engine.runRenderLoop(function () {
-        scene.activeCamera.alpha -= (0.0005 * scene.activeCamera.fov * scene.pause);
+        scene.activeCamera.alpha -= (0.000125 * scene.activeCamera.fov * scene.pause);
         if (scene.zoomState > scene.activeCamera.fov.toFixed(2)) {
             scene.activeCamera.fov += scene.zoomSpeed;
             scene.activeCamera.angularSensibilityX = (3000 / scene.activeCamera.fov);
