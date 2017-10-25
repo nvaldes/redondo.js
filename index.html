@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Babylon.js sample code</title>
-    <link rel="stylesheet" href="assets/main.css">
-  </head>
+    <link rel="stylesheet" media="all" href="https://c21stores-weblinc.netdna-ssl.com/assets/weblinc/store_front/application-bd59fc1803ada49e8d79913b6ee8ee78a6b5169455902e60099f80dab2f8b313.css">
+    <link rel="stylesheet" type="text/css" href="/assets/main.css">
+</head>
 
-  <body>
+<body>
     <div id="redondo_container">
       <img id="redondo_icon" src="assets/360_icon.png"></img>
       <div id="redondo_loading">
@@ -16,11 +17,23 @@
       <article class= "jm-360-outcards" id="card_BeltRobeHim">
         <h3>Gifts for Him <b>up to 65% off</b></h3>
         <p class='content-block-content__action content-block-content__action--dark-text'>
-          <a class='text' href='https://www.c21stores.com/categories/gifts-for-him' target='_blank'>SHOP ALL</a></p>
+        <a class='text' href='https://www.c21stores.com/categories/gifts-for-him' target='_blank'>SHOP ALL</a></p>
+        <a class="jm-360-info-card-close" onclick="closeCardsSingle(this);" href="#">×</a>
       </article>
 
-      <p class= "jm-360-outcards" id="card_MenScarves">BeltRobeHim2</p>
+      <article class= "jm-360-outcards" id="card_MenScarves">
+        <h3>Men’s Hats, Scarves &amp; Gloves <b>Over 60% Off</b></h3>
+        <p class='content-block-content__action content-block-content__action--dark-text'>
+        <a class='text' href='https://www.c21stores.com/categories/men-hats-scarves-gloves' target='_blank'>SHOP ALL</a></p>
+        <a class="jm-360-info-card-close" onclick="closeCardsSingle(this);" href="#">×</a>
+      </article>
 
+      <article class= "jm-360-outcards" id="card_MenScarves">
+        <h3>Men’s Watches <b>Over 50% Off</b></h3>
+        <p class='content-block-content__action content-block-content__action--dark-text'>
+        <a class='text' href='https://www.c21stores.com/categories/men-hats-scarves-gloves' target='_blank'>SHOP ALL</a></p>
+        <a class="jm-360-info-card-close" onclick="closeCardsSingle(this);" href="#">×</a>
+      </article>
     </div>
     <script src="dist/bundle.js"></script>
     <script>
@@ -349,17 +362,48 @@
       }
 
       function newcard(k) {
-        var card = document.getElementById('card_' + k.id);
-        card.classList.add('jm-taraa');
-        card.style.top = (event.clientY - (card.offsetHeight / 2)) + 'px';
-        card.style.left = event.clientX + 'px';
-      }
+            var card = document.getElementById('card_'+k.id);
+
+            card.classList.add('jm-taraa');
+            //card.style.top = (event.clientY - (card.offsetHeight / 2) - card.offsetHeight/2) + 'px';
+            //card.style.left = event.clientX + 'px' ;
+
+            var Viewwer_Height = document.documentElement.clientHeight;
+            var Viewwer_Width = document.documentElement.clientWidth;
+            var Card_Height = document.getElementById('card_'+k.id).offsetHeight;
+            var Card_Width = document.getElementById('card_'+k.id).offsetWidth;
+
+
+            console.log(event.clientX + " + " +event.clientY);
+            console.log(Viewwer_Width + " + " + Viewwer_Height);
+            console.log(Card_Width + " + " + Card_Height);
+            //card.style.top = (event.clientY - (card.offsetHeight / 2) - card.offsetHeight/2) + 'px';
+            //card.style.left = event.clientX + 'px' ;
+
+            card.style.top = event.clientY + 'px';
+            card.style.left = event.clientX + 'px';
+
+
+        }
 
       function getClickPosition(e) {
         var xPosition = e.clientX;
         var yPosition = e.clientY;
         console.console.log(xPosition + ' - ' + xPosition);
       }
+
+      function closeCards(e){
+          var cardout = document.getElementsByClassName('jm-360-outcards');
+          //cardout.style.display = 'none';
+          for (var i=0;i<cardout.length;i+=1){
+            cardout[i].classList.remove('jm-taraa');
+          }
+        }
+
+        function closeCardsSingle(k){
+          var parentk = k.parentElement;
+          parentk.classList.remove('jm-taraa');
+        }
     </script>
   </body>
 </html>
