@@ -127,36 +127,69 @@
           rotation: [0, Math.PI / 2, 0]
         }
       };
-      var sides = [{
-        //GIRL
-        url: 'http://redondo.supraluminal.io/assets/face-r.png',
-        position: [-1022, 0, 0],
-        rotation: [0, -Math.PI / 2, 0]
-      }, {
-        //MEN
-        url: 'http://redondo.supraluminal.io/assets/face-l.png',
-        position: [1022, 0, 0],
-        rotation: [0, Math.PI / 2, 0]
-      }, {
-        //CEALING
-        url: 'http://redondo.supraluminal.io/assets/face-t.png',
-        position: [0, 1022, 0],
-        rotation: [-Math.PI / 2, 0, Math.PI]
-      }, {
-        //FLOOR
-        url: 'http://redondo.supraluminal.io/assets/face-d.png',
-        position: [0, -1022, 0],
-        rotation: [Math.PI / 2, 0, Math.PI]
-      }, {
-        //BOY
-        url: 'http://redondo.supraluminal.io/assets/face-b.png',
-        position: [0, 0, 1022],
-        rotation: [0, 0, 0]
-      }, {
-        url: 'http://redondo.supraluminal.io/assets/face-f.png',
-        position: [0, 0, -1022],
-        rotation: [0, -Math.PI, 0]
-      }];
+      if (window.innerWidth < 1050) {
+        var sides = [{
+          //GIRL
+          url: 'assets/face-r@1x.jpg',
+          position: [-1022, 0, 0],
+          rotation: [0, -Math.PI / 2, 0]
+        }, {
+          //MEN
+          url: 'assets/face-l@1x.jpg',
+          position: [1022, 0, 0],
+          rotation: [0, Math.PI / 2, 0]
+        }, {
+          //CEALING
+          url: 'assets/face-t@1x.jpg',
+          position: [0, 1022, 0],
+          rotation: [-Math.PI / 2, 0, Math.PI]
+        }, {
+          //FLOOR
+          url: 'assets/face-d@1x.jpg',
+          position: [0, -1022, 0],
+          rotation: [Math.PI / 2, 0, Math.PI]
+        }, {
+          //BOY
+          url: 'assets/face-b@1x.jpg',
+          position: [0, 0, 1022],
+          rotation: [0, 0, 0]
+        }, {
+          url: 'assets/face-f@1x.jpg',
+          position: [0, 0, -1022],
+          rotation: [0, -Math.PI, 0]
+        }];
+      } else {
+        var sides = [{
+          //GIRL
+          url: 'assets/face-r.jpg',
+          position: [-1022, 0, 0],
+          rotation: [0, -Math.PI / 2, 0]
+        }, {
+          //MEN
+          url: 'assets/face-l.jpg',
+          position: [1022, 0, 0],
+          rotation: [0, Math.PI / 2, 0]
+        }, {
+          //CEALING
+          url: 'assets/face-t.jpg',
+          position: [0, 1022, 0],
+          rotation: [-Math.PI / 2, 0, Math.PI]
+        }, {
+          //FLOOR
+          url: 'assets/face-d.jpg',
+          position: [0, -1022, 0],
+          rotation: [Math.PI / 2, 0, Math.PI]
+        }, {
+          //BOY
+          url: 'assets/face-b.jpg',
+          position: [0, 0, 1022],
+          rotation: [0, 0, 0]
+        }, {
+          url: 'assets/face-f.jpg',
+          position: [0, 0, -1022],
+          rotation: [0, -Math.PI, 0]
+        }];
+      }
       var imagesLoaded = 0;
 
       function imageLoader() {
@@ -240,7 +273,7 @@
           //END THIS
           var element = document.createElement('img');
           element.onload = imageLoader();
-          element.width = 2048;
+          element.style.width = '2048px';
           element.src = side.url;
           var object = new THREE.CSS3DObject(element);
           object.position.fromArray(side.position);
