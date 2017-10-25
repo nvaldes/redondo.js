@@ -1,573 +1,605 @@
 <!DOCTYPE html>
 <html>
 
-<head>
+  <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Babylon.js sample code</title>
-   <style>
-.jm-360-outcards{
-  display: none;
-}
-.jm-taraa{
-  display: block;
-}
-#redondo_container{
-  position: relative;
-}
-.jm-360-outcards{
-  position: absolute;
-  top: 0;
-  width: auto;
-  z-index: 9999;
-      background: white;
-      text-align: center;
-      padding: 2% 3%;
-      left: 50%;
-      margin-left: -6%;
-      top: 32%;
-}
-        #redondo_container img {
-          max-width: none;
-        }
-        .jm-sonar-icon {
-            display: inline-block;
-            font-size: 0px;
-            cursor: pointer;
-            margin: 2%;
-            width: 17px;
-            height: 17px;
-            border-radius: 50%;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            color: #fff;
-        }
-
-        .jm-sonar-icon:after {
-            pointer-events: none;
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            content: '';
-            -webkit-box-sizing: content-box;
-            -moz-box-sizing: content-box;
-            box-sizing: content-box;
-        }
-
-
-        .jm-sonar-one .jm-sonar-icon {
-            background: rgba(255, 255, 255, 1);
-            -webkit-transition: -webkit-transform ease-out 0.1s, background 0.2s;
-            -moz-transition: -moz-transform ease-out 0.1s, background 0.2s;
-            transition: transform ease-out 0.1s, background 0.2s;
-        }
-
-        .jm-sonar-one .jm-sonar-icon:after {
-            top: 0;
-            left: 0;
-            padding: 0;
-            z-index: -1;
-            box-shadow: 0 0 0 2px rgba(255, 255, 255, 1);
-            opacity: 0;
-            -webkit-transform: scale(0.9);
-            -moz-transform: scale(0.9);
-            -ms-transform: scale(0.9);
-            transform: scale(0.9);
-        }
-
-
-        .jm-sonar-one .jm-sonar-icon:after {
-            -webkit-animation: sonar-one 1.3s ease-out 75ms;
-            -moz-animation: sonar-one 1.3s ease-out 75ms;
-            animation: sonar-one 1.3s ease-out 75ms;
-            -webkit-animation-duration: 5s;
-            -webkit-animation-iteration-count: infinite;
-            -webkit-animation-timing-function: linear;
-            -webkit-animation-delay: 0s;
-        }
-        .jm-360-info-card{
-          -webkit-animation: fade-in-cards 1.3s;
-          -moz-animation: fade-in-cards 1.3s;
-          animation: fade-in-cards 1.3s;
-        }
-        @-webkit-keyframes fade-in-cards {
-          0%   { opacity: 0; }
-          100% { opacity: : 1; }
-        }
-        @-webkit-keyframes sonar-one {
-            0% {
-                opacity: 0.3;
-            }
-            40% {
-                opacity: 0.5;
-                box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255, 255, 255, 0.5);
-            }
-            100% {
-                box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255, 255, 255, 0.5);
-                -webkit-transform: scale(1.5);
-                opacity: 0;
-            }
-        }
-
-        @-moz-keyframes sonar-one {
-            0% {
-                opacity: 0.3;
-            }
-            40% {
-                opacity: 0.5;
-                box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255, 255, 255, 0.5);
-            }
-            100% {
-                box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255, 255, 255, 0.5);
-                -moz-transform: scale(1.5);
-                opacity: 0;
-            }
-        }
-
-        @keyframes sonar-one {
-            0% {
-                opacity: 0.3;
-            }
-            40% {
-                opacity: 0.5;
-                box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255, 255, 255, 0.5);
-            }
-            100% {
-                box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255, 255, 255, 0.5);
-                transform: scale(1.5);
-                opacity: 0;
-            }
-        }
-    </style>
     <style>
-        .jm-sample-background {
-            padding: 15% 0;
-            background: grey;
-            position: relative;
-        }
+      progress[value] {
+        /* Reset the default appearance */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        /* Get rid of default border in Firefox. */
+        border: none;
+        height: 4px;
+        border-radius: 2px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+      }
 
-        .jm-360-info-card {
-            position: absolute;
-            background: rgba(255,255,255, 0.9);
-            padding: 1.4% 1.5%;
-            text-align: center;
-        }
+      progress[value]::-moz-progress-bar {
+        background-color: #333;
+        border-radius: 2px;
+      }
 
-        article.jm-360-info-card h3 {
-            margin: 0;
-            font-size: 1.4em;
-            letter-spacing: 0.03em;
-            font-weight: normal;
-        }
-        a.jm-360-info-card-close {
-          position: absolute;
-          top: -10px;
-          right: -10px;
-          background: #fff;
-          border: solid 1px #999;
-          border-radius: 50% 50%;
-          color: #333;
-          text-decoration: none;
-          min-width: 20px;
-          min-height: 20px;
-          text-align: center;
-        }
+      progress[value]::-webkit-progress-bar {
+        background-color: #fff;
+        border-radius: 2px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+      }
 
+      progress[value]::-webkit-progress-value {
+        background-color: #333;
+        border-radius: 2px;
+      }
+
+      .jm-360-outcards {
+        display: none;
+      }
+
+      .jm-taraa {
+        display: block;
+      }
+
+      #redondo_container {
+        position: relative;
+      }
+
+      .jm-360-outcards {
+        position: absolute;
+        top: 0;
+        width: auto;
+        z-index: 9999;
+        background: white;
+        text-align: center;
+        padding: 2% 3%;
+        left: 50%;
+        margin-left: -6%;
+        top: 32%;
+      }
+
+      #redondo_container img {
+        max-width: none;
+      }
+
+      img#redondo_icon {
+        position: absolute;
+        z-index: 5;
+        width: 160px;
+        top: calc(50% - 50px);
+        right: calc(50% - 80px);
+        -webkit-transition: all 1000ms ease-in-out;
+        -moz-transition: all 1000ms ease-in-out;
+        -o-transition: all 1000ms ease-in-out;
+        -ms-transition: all 1000ms ease-in-out;
+        transition: all 1000ms ease-in-out;
+      }
+
+      #redondo_loading {
+        opacity: 1;
+        -webkit-transition: opacity 1000ms linear;
+        transition: opacity 1000ms linear;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 3;
+        background: #D13530;
+      }
+
+      #redondo_loading-progress {
+        position: absolute;
+        top: calc(50% + 65px);
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .jm-sonar-icon {
+        display: inline-block;
+        font-size: 0px;
+        cursor: pointer;
+        margin: 2%;
+        width: 17px;
+        height: 17px;
+        border-radius: 50%;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+        color: #fff;
+      }
+
+      .jm-sonar-icon:after {
+        pointer-events: none;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        content: '';
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+      }
+
+      .jm-sonar-one .jm-sonar-icon {
+        background: rgba(255, 255, 255, 1);
+        -webkit-transition: -webkit-transform ease-out 0.1s, background 0.2s;
+        -moz-transition: -moz-transform ease-out 0.1s, background 0.2s;
+        transition: transform ease-out 0.1s, background 0.2s;
+      }
+
+      .jm-sonar-one .jm-sonar-icon:after {
+        top: 0;
+        left: 0;
+        padding: 0;
+        z-index: -1;
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 1);
+        opacity: 0;
+        -webkit-transform: scale(0.9);
+        -moz-transform: scale(0.9);
+        -ms-transform: scale(0.9);
+        transform: scale(0.9);
+      }
+
+      .jm-sonar-one .jm-sonar-icon:after {
+        -webkit-animation: sonar-one 1.3s ease-out 75ms;
+        -moz-animation: sonar-one 1.3s ease-out 75ms;
+        animation: sonar-one 1.3s ease-out 75ms;
+        -webkit-animation-duration: 5s;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: linear;
+        -webkit-animation-delay: 0s;
+      }
+
+      .jm-360-info-card {
+        -webkit-animation: fade-in-cards 1.3s;
+        -moz-animation: fade-in-cards 1.3s;
+        animation: fade-in-cards 1.3s;
+      }
+
+      @-webkit-keyframes fade-in-cards {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: : 1;
+        }
+      }
+
+      @-webkit-keyframes sonar-one {
+        0% {
+          opacity: 0.3;
+        }
+        40% {
+          opacity: 0.5;
+          box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        100% {
+          box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255, 255, 255, 0.5);
+          -webkit-transform: scale(1.5);
+          opacity: 0;
+        }
+      }
+
+      @-moz-keyframes sonar-one {
+        0% {
+          opacity: 0.3;
+        }
+        40% {
+          opacity: 0.5;
+          box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        100% {
+          box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255, 255, 255, 0.5);
+          -moz-transform: scale(1.5);
+          opacity: 0;
+        }
+      }
+
+      @keyframes sonar-one {
+        0% {
+          opacity: 0.3;
+        }
+        40% {
+          opacity: 0.5;
+          box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        100% {
+          box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255, 255, 255, 0.5);
+          transform: scale(1.5);
+          opacity: 0;
+        }
+      }
+
+      .jm-sample-background {
+        padding: 15% 0;
+        background: grey;
+        position: relative;
+      }
+
+      .jm-360-info-card {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 1.4% 1.5%;
+        text-align: center;
+      }
+
+      article.jm-360-info-card h3 {
+        margin: 0;
+        font-size: 1.4em;
+        letter-spacing: 0.03em;
+        font-weight: normal;
+      }
+
+      a.jm-360-info-card-close {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background: #fff;
+        border: solid 1px #999;
+        border-radius: 50% 50%;
+        color: #333;
+        text-decoration: none;
+        min-width: 20px;
+        min-height: 20px;
+        text-align: center;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-    
+  <body>
     <div id="redondo_container">
-
+      <img id="redondo_icon" src="assets/360_icon.png"></img>
+      <div id="redondo_loading">
+        <progress id="redondo_loading-progress" value="0"></progress>
+      </div>
       <article class= "jm-360-outcards" id="card_BeltRobeHim">
         <h3>Gifts for Him <b>up to 65% off</b></h3>
         <p class='content-block-content__action content-block-content__action--dark-text'>
-        <a class='text' href='https://www.c21stores.com/categories/gifts-for-him' target='_blank'>SHOP ALL</a></p>
+          <a class='text' href='https://www.c21stores.com/categories/gifts-for-him' target='_blank'>SHOP ALL</a></p>
       </article>
 
-    <p class= "jm-360-outcards" id="card_MenScarves">BeltRobeHim2</p>
+      <p class= "jm-360-outcards" id="card_MenScarves">BeltRobeHim2</p>
 
     </div>
     <script src="dist/bundle.js"></script>
     <script>
-        $ = document.querySelectorAll;
-        var camera, scene, renderer;
-        var geometry, material, mesh;
-        var target = new THREE.Vector3();
-        var lon = -90,
-            lat = 0;
-        var phi = 0,
-            theta = 0;
-        var touchX, touchY;
-        var mouseMoved = false;
-
-        var links = {
-          // MEN PLANE
-          //position: [1000, -459, 67],
-          //rotation: [0, Math.PI / -2, 0]
-
-          Menwatches:  {
-            content:  "<h3>Men's Watches <b>over 50% off</b></h3>"+
-                      "<p class='content-block-content__action content-block-content__action--dark-text'>"+
-                      "<a class='text' href='https://www.c21stores.com/categories/men-watches' target='_blank'>SHOP ALL</a></p>",
-            position: [1000, -459, 67],
-            rotation: [0, Math.PI / -2, 0]
-          },
-          MenScarves:  {
-            content:  "<h3>Men's Hats, Scarves & Gloves <b>over 60% off</h3>"+
-                      "<p class='content-block-content__action content-block-content__action--dark-text'>"+
-                      "<a class='text' href='https://www.c21stores.com/categories/men-hats-scarves-gloves' target='_blank'>SHOP ALL</a></p>",
-            position: [1000, -751, 228],
-            rotation: [0, Math.PI / -2, 0]
-          },
-          BeatsHeadphones:  {
-            content:  "<h3>Tech Gifts <b>over 50% off</b></h3>"+
-                      "<p class='content-block-content__action content-block-content__action--dark-text'>"+
-                      "<a class='text' href='https://www.c21stores.com/categories/gifts-tech' target='_blank'>SHOP ALL</a></p>",
-            position: [1000, 226, -76],
-            rotation: [0, Math.PI / -2, 0]
-          },
-          BeltRobeHim: {
-            content:  "<h3>Gifts for Him <b>up to 65% off</b></h3>"+
-                      "<p class='content-block-content__action content-block-content__action--dark-text'>"+
-                      "<a class='text' href='https://www.c21stores.com/categories/gifts-for-him' target='_blank'>SHOP ALL</a></p>",
-            position: [1000, -289, 527],
-            rotation: [0, Math.PI / -2, 0]
-          },
-          FragranceHim: {
-            content:  "<h3>Men's Fragrances <b>over 50% off</b></h3>"+
-                      "<p class='content-block-content__action content-block-content__action--dark-text'>"+
-                      "<a class='text' href='https://www.c21stores.com/categories/beauty-mens-fragrances' target='_blank'>SHOP ALL</a></p>",
-            position: [1000, -647, -787],
-            rotation: [0, Math.PI / -2, 0]
-          },
-          TieHim: {
-            content:  "<h3>Ties <b>over 75% off</b></h3>"+
-                      "<p class='content-block-content__action content-block-content__action--dark-text'>"+
-                      "<a class='text' href='https://www.c21stores.com/categories/men-ties' target='_blank'>SHOP ALL</a></p>",
-            position: [1000, -547, -787],
-            rotation: [0, Math.PI / -2, 0]
-          },
-
-          // BOYS PLANE
-          //position: [481, -125, 1000],
-          //rotation: [0,  Math.PI, 0]
-          GraySweaterHim: {
-            content:  "<h3>Men's Cashmere <b>over 65% off</b></h3>"+
-                      "<p class='content-block-content__action content-block-content__action--dark-text'>"+
-                      "<a class='text' href='https://www.c21stores.com/categories/new-now-men-cashmere' target='_blank'>SHOP ALL</a></p>",
-            position: [835, -670, 1000],
-            rotation: [0,  Math.PI, 0]
-          },
-          SuitBoy: {
-            content:  "<h3>Boys Special Occasion <b>over 55% off</b></h3>"+
-                      "<p class='content-block-content__action content-block-content__action--dark-text'>"+
-                      "<a class='text' href='https://www.c21stores.com/categories/kids-party-perfect?kids_category%5B%5D=boys+8+to+20&kids_category%5B%5D=boys+shoes&kids_category%5B%5D=boys+4+to+7&kids_category%5B%5D=infant+boy&kids_category%5B%5D=toddler+boy' target='_blank'>SHOP ALL</a></p>",
-            position: [102, -191, 1000],
-            rotation: [0,  Math.PI, 0]
-          },
-          ScooterBoy: {
-            content:  "<h3>Gifts for Kids <b>up to 65% off</b></h3>"+
-                      "<p class='content-block-content__action content-block-content__action--dark-text'>"+
-                      "<a class='text' href='https://www.c21stores.com/categories/gifts-for-kids' target='_blank'>SHOP ALL</a></p>",
-            position: [481, -125, 1000],
-            rotation: [0, Math.PI, 0]
-          },
-
-          //WOMEN PLANE
-          //position: [481, -125, 1000],
-          //rotation: [0,  Math.PI, 0]
-
-          NecklaceWomen: {
-            content:  "<h3>Jewelry <b>up to 50% off</b></h3>"+
-                      "<p class='content-block-content__action content-block-content__action--dark-text'>"+
-                      "<a class='text' href='https://www.c21stores.com/categories/handbags-accessories-shop-all-jewelry' target='_blank'>SHOP ALL</a></p>",
-            position: [-304, -53, -1000],
-            rotation: [Math.PI, Math.PI, Math.PI]
-          },
-          RedSweaterWomen: {
-            content:  "<h3>Gifts For Her <b>up to 65% off</b></h3>"+
-                      "<p class='content-block-content__action content-block-content__action--dark-text'>"+
-                      "<a class='text' href='https://www.c21stores.com/categories/gifts-for-her' target='_blank'>SHOP ALL</a></p>",
-            position: [-461, -303, -1000],
-            rotation: [Math.PI, Math.PI, Math.PI]
-          },
-
-
-          //CELING PLANE
-          //position: [0, 1000, 0],
-          //rotation: [Math.PI/ 2,0  , 0]
-
-          //FLOOR PLANE
-          //position: [0, 1000, 0],
-          //rotation: [Math.PI/ 2,0  , 0]
-
-          // GIRL PLANE
-          //position: [ 0, -1000, 0 ],
-          //rotation: [-Math.PI/2, 0, 0]
-
-          testing: {
-            content:  "<h3>testing testing<b>testing</b></h3>"+
-                      "<p class='content-block-content__action content-block-content__action--dark-text'>"+
-                      "<a class='text' href='https://www.c21stores.com/categories/handbags-accessories-shop-all-jewelry' target='_blank'>SHOP ALL</a></p>",
-            position: [-1000, -751, 228],
-            rotation: [0, Math.PI /2, 0]
-          }
-
-        };
-
-            var sides = [{
-                        //GIRL
-                        url: 'http://redondo.supraluminal.io/assets/face-r.png',
-                        position: [-1022, 0, 0],
-                        rotation: [0, -Math.PI / 2, 0]
-                    },
-                    {
-                        //MEN
-                        url: 'http://redondo.supraluminal.io/assets/face-l.png',
-                        position: [1022, 0, 0],
-                        rotation: [0, Math.PI / 2, 0]
-                    },
-                    {
-                        //CEALING
-                        url: 'http://redondo.supraluminal.io/assets/face-t.png',
-                        position: [0, 1022, 0],
-                        rotation: [-Math.PI / 2, 0, Math.PI]
-                    },
-                    {
-                        //FLOOR
-                        url: 'http://redondo.supraluminal.io/assets/face-d.png',
-                        position: [0, -1022, 0],
-                        rotation: [Math.PI / 2, 0, Math.PI]
-                    },
-                    {
-                        //BOY
-                        url: 'http://redondo.supraluminal.io/assets/face-b.png',
-                        position: [0, 0, 1022],
-                        rotation: [0, 0, 0]
-                    },
-                    {
-                        url: 'http://redondo.supraluminal.io/assets/face-f.png',
-                        position: [0, 0, -1022],
-                        rotation: [0, -Math.PI, 0]
-                    }
-                ];
-
-        var imagesLoaded = 0;
-        function imageLoader() {
-          imagesLoaded++;
-          console.log(imagesLoaded);
-          if (imagesLoaded === sides.length) {
-            //kill loading animation
-          }
+      var lonDelta = 1.0;
+      var camera, scene, renderer;
+      var geometry, material, mesh;
+      var target = new THREE.Vector3();
+      var lon = -90,
+        lat = 0;
+      var phi = 0,
+        theta = 0;
+      var touchX, touchY;
+      var mouseMoved = false;
+      var links = {
+        // MEN PLANE
+        //position: [1000, -459, 67],
+        //rotation: [0, Math.PI / -2, 0]
+        Menwatches: {
+          content: "<h3>Men's Watches <b>over 50% off</b></h3>" + "<p class='content-block-content__action content-block-content__action--dark-text'>" + "<a class='text' href='https://www.c21stores.com/categories/men-watches' target='_blank'>SHOP ALL</a></p>",
+          position: [1000, -459, 67],
+          rotation: [0, Math.PI / -2, 0]
+        },
+        MenScarves: {
+          content: "<h3>Men's Hats, Scarves & Gloves <b>over 60% off</h3>" + "<p class='content-block-content__action content-block-content__action--dark-text'>" + "<a class='text' href='https://www.c21stores.com/categories/men-hats-scarves-gloves' target='_blank'>SHOP ALL</a></p>",
+          position: [1000, -751, 228],
+          rotation: [0, Math.PI / -2, 0]
+        },
+        BeatsHeadphones: {
+          content: "<h3>Tech Gifts <b>over 50% off</b></h3>" + "<p class='content-block-content__action content-block-content__action--dark-text'>" + "<a class='text' href='https://www.c21stores.com/categories/gifts-tech' target='_blank'>SHOP ALL</a></p>",
+          position: [1000, 226, -76],
+          rotation: [0, Math.PI / -2, 0]
+        },
+        BeltRobeHim: {
+          content: "<h3>Gifts for Him <b>up to 65% off</b></h3>" + "<p class='content-block-content__action content-block-content__action--dark-text'>" + "<a class='text' href='https://www.c21stores.com/categories/gifts-for-him' target='_blank'>SHOP ALL</a></p>",
+          position: [1000, -289, 527],
+          rotation: [0, Math.PI / -2, 0]
+        },
+        FragranceHim: {
+          content: "<h3>Men's Fragrances <b>over 50% off</b></h3>" + "<p class='content-block-content__action content-block-content__action--dark-text'>" + "<a class='text' href='https://www.c21stores.com/categories/beauty-mens-fragrances' target='_blank'>SHOP ALL</a></p>",
+          position: [1000, -647, -787],
+          rotation: [0, Math.PI / -2, 0]
+        },
+        TieHim: {
+          content: "<h3>Ties <b>over 75% off</b></h3>" + "<p class='content-block-content__action content-block-content__action--dark-text'>" + "<a class='text' href='https://www.c21stores.com/categories/men-ties' target='_blank'>SHOP ALL</a></p>",
+          position: [1000, -547, -787],
+          rotation: [0, Math.PI / -2, 0]
+        },
+        // BOYS PLANE
+        //position: [481, -125, 1000],
+        //rotation: [0,  Math.PI, 0]
+        GraySweaterHim: {
+          content: "<h3>Men's Cashmere <b>over 65% off</b></h3>" + "<p class='content-block-content__action content-block-content__action--dark-text'>" + "<a class='text' href='https://www.c21stores.com/categories/new-now-men-cashmere' target='_blank'>SHOP ALL</a></p>",
+          position: [835, -670, 1000],
+          rotation: [0, Math.PI, 0]
+        },
+        SuitBoy: {
+          content: "<h3>Boys Special Occasion <b>over 55% off</b></h3>" + "<p class='content-block-content__action content-block-content__action--dark-text'>" + "<a class='text' href='https://www.c21stores.com/categories/kids-party-perfect?kids_category%5B%5D=boys+8+to+20&kids_category%5B%5D=boys+shoes&kids_category%5B%5D=boys+4+to+7&kids_category%5B%5D=infant+boy&kids_category%5B%5D=toddler+boy' target='_blank'>SHOP ALL</a></p>",
+          position: [102, -191, 1000],
+          rotation: [0, Math.PI, 0]
+        },
+        ScooterBoy: {
+          content: "<h3>Gifts for Kids <b>up to 65% off</b></h3>" + "<p class='content-block-content__action content-block-content__action--dark-text'>" + "<a class='text' href='https://www.c21stores.com/categories/gifts-for-kids' target='_blank'>SHOP ALL</a></p>",
+          position: [481, -125, 1000],
+          rotation: [0, Math.PI, 0]
+        },
+        //WOMEN PLANE
+        //position: [481, -125, 1000],
+        //rotation: [0,  Math.PI, 0]
+        NecklaceWomen: {
+          content: "<h3>Jewelry <b>up to 50% off</b></h3>" + "<p class='content-block-content__action content-block-content__action--dark-text'>" + "<a class='text' href='https://www.c21stores.com/categories/handbags-accessories-shop-all-jewelry' target='_blank'>SHOP ALL</a></p>",
+          position: [-304, -53, -1000],
+          rotation: [Math.PI, Math.PI, Math.PI]
+        },
+        RedSweaterWomen: {
+          content: "<h3>Gifts For Her <b>up to 65% off</b></h3>" + "<p class='content-block-content__action content-block-content__action--dark-text'>" + "<a class='text' href='https://www.c21stores.com/categories/gifts-for-her' target='_blank'>SHOP ALL</a></p>",
+          position: [-461, -303, -1000],
+          rotation: [Math.PI, Math.PI, Math.PI]
+        },
+        //CELING PLANE
+        //position: [0, 1000, 0],
+        //rotation: [Math.PI/ 2,0  , 0]
+        //FLOOR PLANE
+        //position: [0, 1000, 0],
+        //rotation: [Math.PI/ 2,0  , 0]
+        // GIRL PLANE
+        //position: [ 0, -1000, 0 ],
+        //rotation: [-Math.PI/2, 0, 0]
+        testing: {
+          content: "<h3>testing testing<b>testing</b></h3>" + "<p class='content-block-content__action content-block-content__action--dark-text'>" + "<a class='text' href='https://www.c21stores.com/categories/handbags-accessories-shop-all-jewelry' target='_blank'>SHOP ALL</a></p>",
+          position: [-1000, -751, 228],
+          rotation: [0, Math.PI / 2, 0]
         }
-        init();
-        animate();
+      };
+      var sides = [{
+        //GIRL
+        url: 'http://redondo.supraluminal.io/assets/face-r.png',
+        position: [-1022, 0, 0],
+        rotation: [0, -Math.PI / 2, 0]
+      }, {
+        //MEN
+        url: 'http://redondo.supraluminal.io/assets/face-l.png',
+        position: [1022, 0, 0],
+        rotation: [0, Math.PI / 2, 0]
+      }, {
+        //CEALING
+        url: 'http://redondo.supraluminal.io/assets/face-t.png',
+        position: [0, 1022, 0],
+        rotation: [-Math.PI / 2, 0, Math.PI]
+      }, {
+        //FLOOR
+        url: 'http://redondo.supraluminal.io/assets/face-d.png',
+        position: [0, -1022, 0],
+        rotation: [Math.PI / 2, 0, Math.PI]
+      }, {
+        //BOY
+        url: 'http://redondo.supraluminal.io/assets/face-b.png',
+        position: [0, 0, 1022],
+        rotation: [0, 0, 0]
+      }, {
+        url: 'http://redondo.supraluminal.io/assets/face-f.png',
+        position: [0, 0, -1022],
+        rotation: [0, -Math.PI, 0]
+      }];
+      var imagesLoaded = 0;
 
-        function init() {
-            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
-            scene = new THREE.Scene();
-
-
-
-            Object.keys(links).forEach(function(k) {
-                var sonarElement = document.createElement('div');
-                // sonarElement.onclick = function(e) {
-                //   var cardElement = document.createElement('article');
-                //   cardElement.id = k + '_card';
-                //   cardElement.className = 'jm-360-info-card'
-                //   cardElement.innerHTML = links[k].content;
-                //   var closeLink = document.createElement('a');
-                //   closeLink.className = "jm-360-info-card-close";
-                //   closeLink.innerHTML = "&times;";
-                //   closeLink.href = '#';
-                //   closeLink.onclick = function(e) {
-                //     e.preventDefault();
-                //     var curr = scene.getObjectByName(k + '_card');
-                //     scene.remove(curr);
-                //   };
-                //   cardElement.appendChild(closeLink);
-
-                //   var card = new THREE.CSS3DObject(cardElement);
-                //   card.name = k + '_card';
-                //   card.position.fromArray(links[k].position);
-                //   card.rotation.fromArray(links[k].rotation);
-
-                //   //card.lookAt(camera.position + 100);
-                //   card.quaternion.equals(camera.quaternion );
-                //   scene.add(card);
-                //   getClickPosition();
-
-
-                // };
-                sonarElement.className = 'jm-sonar-one';
-                sonarElement.innerHTML = '<a id="' + k + '" onclick="newcard('+ k +')" class="jm-sonar-icon"></a>';
-                var sonar = new THREE.CSS3DObject(sonarElement);
-                sonar.position.fromArray(links[k].position);
-                //sonar.rotation.fromArray(links[k].rotation);
-                sonar.lookAt(camera.position);
-                scene.add(sonar);
-
-
-            });
-
-            var loader = new THREE.ImageLoader();
-            for (var i = 0; i < sides.length; i++) {
-              var side = sides[i];
-
-
-              //THIS
-              // loader.load(
-              //   side.url,
-              //   function(img){
-              //     img.width = 2048;
-              //     var object = new THREE.CSS3DObject(img);
-              //     object.position.fromArray(side.position);
-              //     object.rotation.fromArray(side.rotation);
-              //     scene.add(object);
-              //     imagesLoaded++;
-              //     if (imagesLoaded == sides.length) {
-              //       console.warn('loading complete, handle it.');
-              //     }
-              //   }
-              // );
-              //END THIS
-
-
-              var element = document.createElement('img');
-              element.onload = imageLoader();
-              element.width = 2048;
-              element.src = side.url;
-              var object = new THREE.CSS3DObject(element);
-              object.position.fromArray(side.position);
-              object.rotation.fromArray(side.rotation);
-              scene.add(object);
-            }
-
-
-
-            renderer = new THREE.CSS3DRenderer();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.domElement.id = 'redondo';
-            document.getElementById('redondo_container').appendChild(renderer.domElement);
-            //
-            document.addEventListener('mousedown', onDocumentMouseDown, false);
-            document.addEventListener('wheel', onDocumentMouseWheel, false);
-            document.addEventListener('touchstart', onDocumentTouchStart, false);
-            document.addEventListener('touchmove', onDocumentTouchMove, false);
-            window.addEventListener('resize', onWindowResize, false);
+      function imageLoader() {
+        imagesLoaded++;
+        console.log(imagesLoaded);
+        if (imagesLoaded === sides.length) {
+          //kill loading animation
         }
+      }
+      init();
+      animate();
 
-        function onWindowResize() {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
+      function baseWidth() {
+        return window.innerWidth - 30;
+      }
+
+      function calcHeight() {
+        return (9 * baseWidth()) / 16;
+        return Math.min((9 * baseWidth()) / 16, window.innerHeight - 300);
+      }
+
+      function calcWidth() {
+        return (16 * calcHeight()) / 9;
+      }
+
+      function init() {
+        camera = new THREE.PerspectiveCamera(60, calcWidth() / calcHeight(), 1, 1000);
+        scene = new THREE.Scene();
+        Object.keys(links).forEach(function(k) {
+          var sonarElement = document.createElement('div');
+          // sonarElement.onclick = function(e) {
+          //   var cardElement = document.createElement('article');
+          //   cardElement.id = k + '_card';
+          //   cardElement.className = 'jm-360-info-card'
+          //   cardElement.innerHTML = links[k].content;
+          //   var closeLink = document.createElement('a');
+          //   closeLink.className = "jm-360-info-card-close";
+          //   closeLink.innerHTML = "&times;";
+          //   closeLink.href = '#';
+          //   closeLink.onclick = function(e) {
+          //     e.preventDefault();
+          //     var curr = scene.getObjectByName(k + '_card');
+          //     scene.remove(curr);
+          //   };
+          //   cardElement.appendChild(closeLink);
+          //   var card = new THREE.CSS3DObject(cardElement);
+          //   card.name = k + '_card';
+          //   card.position.fromArray(links[k].position);
+          //   card.rotation.fromArray(links[k].rotation);
+          //   //card.lookAt(camera.position + 100);
+          //   card.quaternion.equals(camera.quaternion );
+          //   scene.add(card);
+          //   getClickPosition();
+          // };
+          sonarElement.className = 'jm-sonar-one';
+          sonarElement.innerHTML = '<a id="' + k + '" onclick="newcard(' + k + ')" class="jm-sonar-icon"></a>';
+          var sonar = new THREE.CSS3DObject(sonarElement);
+          sonar.position.fromArray(links[k].position);
+          sonar.rotation.fromArray(links[k].rotation);
+          // sonar.lookAt(camera.position);
+          scene.add(sonar);
+        });
+        var loader = new THREE.ImageLoader();
+        for (var i = 0; i < sides.length; i++) {
+          var side = sides[i];
+          //THIS
+          // loader.load(
+          //   side.url,
+          //   function(img){
+          //     img.width = 2048;
+          //     var object = new THREE.CSS3DObject(img);
+          //     object.position.fromArray(side.position);
+          //     object.rotation.fromArray(side.rotation);
+          //     scene.add(object);
+          //     imagesLoaded++;
+          //     if (imagesLoaded == sides.length) {
+          //       console.warn('loading complete, handle it.');
+          //     }
+          //   }
+          // );
+          //END THIS
+          var element = document.createElement('img');
+          element.onload = imageLoader();
+          element.width = 2048;
+          element.src = side.url;
+          var object = new THREE.CSS3DObject(element);
+          object.position.fromArray(side.position);
+          object.rotation.fromArray(side.rotation);
+          scene.add(object);
         }
+        renderer = new THREE.CSS3DRenderer();
+        renderer.setSize(calcWidth(), calcHeight());
+        renderer.domElement.id = 'redondo';
+        document.getElementById('redondo_container').appendChild(renderer.domElement);
+        //
+        // document.addEventListener('wheel', onDocumentMouseWheel, false);
+        window.addEventListener('resize', onWindowResize, false);
+      }
 
-        function onDocumentMouseDown(event) {
-            event.preventDefault();
-            document.addEventListener('mousemove', onDocumentMouseMove, false);
-            document.addEventListener('mouseup', onDocumentMouseUp, false);
-            mouseMoved = false;
+      function onWindowResize() {
+        camera.aspect = calcWidth() / calcHeight();
+        camera.updateProjectionMatrix();
+        renderer.setSize(calcWidth(), calcHeight());
+      }
+
+      function onDocumentMouseDown(event) {
+        event.preventDefault();
+        document.addEventListener('mousemove', onDocumentMouseMove, false);
+        document.addEventListener('mouseup', onDocumentMouseUp, false);
+        mouseMoved = false;
+      }
+
+      function onDocumentMouseMove(event) {
+        var movementX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
+        var movementY = event.movementY || event.mozMovementY || event.webkitMovementY || 0;
+        lon -= movementX * 0.1;
+        lat += movementY * 0.1;
+        mouseMoved = true;
+      }
+
+      function onDocumentMouseUp(event) {
+        document.removeEventListener('mousemove', onDocumentMouseMove);
+        document.removeEventListener('mouseup', onDocumentMouseUp);
+        if (event.target.tagName === 'A') {
+          event.stopPropagation();
+          console.log(event);
+        } else if (!mouseMoved) {
+          Object.keys(links).forEach(function(k) {
+            scene.remove(scene.getObjectByName(k + '_card'));
+          });
         }
+      }
 
-        function onDocumentMouseMove(event) {
-            var movementX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
-            var movementY = event.movementY || event.mozMovementY || event.webkitMovementY || 0;
-            lon -= movementX * 0.1;
-            lat += movementY * 0.1;
-            mouseMoved = true;
-        }
+      function onDocumentMouseWheel(event) {
+        var newFOV = camera.fov + event.deltaY * 0.05;
+        // if (newFOV > 30 && newFOV < 90) {
+          camera.fov += event.deltaY * 0.05;
+          camera.updateProjectionMatrix();
+        // }
+      }
 
-        function onDocumentMouseUp(event) {
-            document.removeEventListener('mousemove', onDocumentMouseMove);
-            document.removeEventListener('mouseup', onDocumentMouseUp);
-            if (event.target.tagName === 'A') {
-              event.stopPropagation();
-              console.log(event);
-            } else if (!mouseMoved) {
-              Object.keys(links).forEach(function(k) {
-                scene.remove(scene.getObjectByName(k + '_card'));
-              });
-            }
-        }
+      function onDocumentTouchStart(event) {
+        var touch = event.touches[0];
+        touchX = touch.screenX;
+        touchY = touch.screenY;
+      }
 
-        function onDocumentMouseWheel(event) {
-          var newFOV = camera.fov + event.deltaY * 0.05;
-          if (newFOV > 30 && newFOV < 90) {
-            camera.fov += event.deltaY * 0.05;
-            //camera.updateProjectionMatrix();
-          }
-        }
-
-        function onDocumentTouchStart(event) {
-            event.preventDefault();
-            var touch = event.touches[0];
-            touchX = touch.screenX;
-            touchY = touch.screenY;
-        }
-
-        function onDocumentTouchMove(event) {
-            event.preventDefault();
-            var touch = event.touches[0];
-            lon -= (touch.screenX - touchX) * 0.1;
-            lat += (touch.screenY - touchY) * 0.1;
-            touchX = touch.screenX;
-            touchY = touch.screenY;
-        }
-
-        // Follows the mouse event
-        function onMouseMove(event) {
-
-            // Update the mouse variable
-            event.preventDefault();
-            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-            mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
-
-         // Make the sphere follow the mouse
-          var vector = new THREE.Vector3(mouse.x, mouse.y, 0.5);
-            vector.unproject( camera );
-            var dir = vector.sub( camera.position ).normalize();
-            var distance = - camera.position.z / dir.z;
-            var pos = camera.position.clone().add( dir.multiplyScalar( distance ) );
-            mouseMesh.position.copy(pos);
-
-            // Make the sphere follow the mouse
+      function onDocumentTouchMove(event) {
+        event.preventDefault();
+        var touch = event.touches[0];
+        lon -= (touch.screenX - touchX) * 0.1;
+        lat += (touch.screenY - touchY) * 0.1;
+        touchX = touch.screenX;
+        touchY = touch.screenY;
+      }
+      // Follows the mouse event
+      function onMouseMove(event) {
+        // Update the mouse variable
+        event.preventDefault();
+        mouse.x = (event.clientX / calcWidth()) * 2 - 1;
+        mouse.y = -(event.clientY / calcHeight()) * 2 + 1;
+        // Make the sphere follow the mouse
+        var vector = new THREE.Vector3(mouse.x, mouse.y, 0.5);
+        vector.unproject(camera);
+        var dir = vector.sub(camera.position).normalize();
+        var distance = -camera.position.z / dir.z;
+        var pos = camera.position.clone().add(dir.multiplyScalar(distance));
+        mouseMesh.position.copy(pos);
+        // Make the sphere follow the mouse
         //  mouseMesh.position.set(event.clientX, event.clientY, 0);
-        };
+      };
 
-
-
-        function animate() {
-            requestAnimationFrame(animate);
-            lon += 0;
-            lat = Math.max(-85, Math.min(85, lat));
-            phi = THREE.Math.degToRad(90 - lat);
-            theta = THREE.Math.degToRad(lon);
-            target.x = Math.sin(phi) * Math.cos(theta);
-            target.y = Math.cos(phi);
-            target.z = Math.sin(phi) * Math.sin(theta);
-            camera.lookAt(target);
-            renderer.render(scene, camera);
+      function animate() {
+        requestAnimationFrame(animate);
+        if (lonDelta == 1.0 && lon >= 270) {
+          lonDelta = 0;
+          var icon = document.getElementById('redondo_icon');
+          icon.style.top = '6px';
+          icon.style.right = '15px';
+          icon.style.width = '74px';
+          icon.style.opacity = '0.7';
+          document.getElementById('redondo_loading').style.opacity = 0
+          setTimeout(function(){
+              document.getElementById('redondo_container').removeChild(document.getElementById('redondo_loading'));
+              document.addEventListener('mousedown', onDocumentMouseDown, false);
+              document.addEventListener('touchstart', onDocumentTouchStart, false);
+              document.addEventListener('touchmove', onDocumentTouchMove, false);
+              //lonDelta = 0.025;
+          }, 1000);
+        } else if (lonDelta == 1.0 && lon < 270) {
+          document.getElementById('redondo_loading-progress').value = (lon + 90) / 360;
+          //progress += 1;
         }
+        lon += lonDelta;
+        lat = Math.max(-85, Math.min(85, lat));
+        phi = THREE.Math.degToRad(90 - lat);
+        theta = THREE.Math.degToRad(lon);
+        target.x = Math.sin(phi) * Math.cos(theta);
+        target.y = Math.cos(phi);
+        target.z = Math.sin(phi) * Math.sin(theta);
+        camera.lookAt(target);
+        renderer.render(scene, camera);
+      }
 
-        function newcard(k) {
-            var card = document.getElementById('card_'+k.id);
-            card.classList.add('jm-taraa');
-            card.style.top = (event.clientY - (card.offsetHeight / 2)) + 'px';
-            card.style.left = event.clientX + 'px';
-            
-            
-        }
+      function newcard(k) {
+        var card = document.getElementById('card_' + k.id);
+        card.classList.add('jm-taraa');
+        card.style.top = (event.clientY - (card.offsetHeight / 2)) + 'px';
+        card.style.left = event.clientX + 'px';
+      }
 
-        function getClickPosition(e) {
-            var xPosition = e.clientX;
-            var yPosition = e.clientY;
-            console.console.log(xPosition + ' - ' + xPosition);
-        }
+      function getClickPosition(e) {
+        var xPosition = e.clientX;
+        var yPosition = e.clientY;
+        console.console.log(xPosition + ' - ' + xPosition);
+      }
     </script>
-</body>
-
+  </body>
 </html>
