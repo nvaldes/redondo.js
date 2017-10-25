@@ -10,7 +10,7 @@
 
 <body>
     <div id="redondo_container">
-      <img id="redondo_icon" src="assets/360_icon.png"></img>
+      <img id="redondo_icon" src="https://c21stores-weblinc.netdna-ssl.com/media/W1siZiIsIjIwMTcvMTAvMDUvMTMvMDIvNDgvMzcvMzYwX2ljb25fMl8ucG5nIl1d/360_icon%5B2%5D.png?sha=c263947ff57ef86ag"></img>
       <div id="redondo_loading">
         <progress id="redondo_loading-progress" value="0"></progress>
       </div>
@@ -436,6 +436,13 @@
           var parentk = k.parentElement;
           parentk.classList.remove('jm-taraa');
         }
+
+        $("img").click(function(){
+          $('.jm-360-outcards').removeClass('jm-taraa');
+          console.log('image!');
+        });
+        
+
     </script>
   </body>
 </html>
