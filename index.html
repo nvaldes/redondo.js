@@ -373,16 +373,15 @@
             var Card_Height = document.getElementById('card_'+k.id).offsetHeight;
             var Card_Width = document.getElementById('card_'+k.id).offsetWidth;
 
-
             console.log(event.clientX + " + " +event.clientY);
             console.log(Viewwer_Width + " + " + Viewwer_Height);
             console.log(Card_Width + " + " + Card_Height);
+
             //card.style.top = (event.clientY - (card.offsetHeight / 2) - card.offsetHeight/2) + 'px';
             //card.style.left = event.clientX + 'px' ;
 
             card.style.top = event.clientY + 'px';
             card.style.left = event.clientX + 'px';
-
 
         }
 
