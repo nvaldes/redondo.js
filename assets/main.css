@@ -60,7 +60,8 @@ img#redondo_icon {
   z-index: 5;
   width: 160px;
   top: calc(50% - 50px);
-  right: calc(50% - 80px);
+  right: calc(50% - 120px);
+  transform: translateX(-25%);
   -webkit-transition: all 1000ms ease-in-out;
   -moz-transition: all 1000ms ease-in-out;
   -o-transition: all 1000ms ease-in-out;
