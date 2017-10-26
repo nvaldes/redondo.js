@@ -13,11 +13,265 @@
             #heroCanvasZone {
                 width: 100%;
                 height: 100%;
+                position: relative;
             }
             #heroRenderCanvas {
                 width: 100%;
                 height: 100%;
             }
+        </style>
+        <style>
+
+
+          progress[value] {
+            /* Reset the default appearance */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            /* Get rid of default border in Firefox. */
+            border: none;
+            height: 4px;
+            border-radius: 2px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+          }
+
+          progress[value]::-moz-progress-bar {
+            background-color: #333;
+            border-radius: 2px;
+          }
+
+          progress[value]::-webkit-progress-bar {
+            background-color: #fff;
+            border-radius: 2px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+          }
+
+          progress[value]::-webkit-progress-value {
+            background-color: #333;
+            border-radius: 2px;
+          }
+
+          .jm-taraa {
+            display: block;
+          }
+
+          #redondo_container {
+            position: relative;
+          }
+
+          .jm-360-outcards {
+            position: absolute;
+            top: 0;
+            /*width: auto;*/;
+            z-index: 9999;
+            background: white;
+            text-align: center;
+            padding: 1% 2%;
+            left: 50%;
+            top: 32%;
+            transform: translate(0, -100%);
+          }
+
+          #redondo_container img {
+            max-width: none;
+          }
+
+          img#redondo_icon {
+            position: absolute;
+            z-index: 5;
+            width: 160px;
+            top: calc(50% - 50px);
+            right: calc(50% - 80px);
+            -webkit-transition: all 1000ms ease-in-out;
+            -moz-transition: all 1000ms ease-in-out;
+            -o-transition: all 1000ms ease-in-out;
+            -ms-transition: all 1000ms ease-in-out;
+            transition: all 1000ms ease-in-out;
+          }
+
+          #redondo_loading {
+            opacity: 1;
+            -webkit-transition: opacity 1000ms linear;
+            transition: opacity 1000ms linear;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 3;
+            background: #D13530;
+          }
+
+          #redondo_loading-progress {
+            position: absolute;
+            top: calc(50% + 65px);
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
+
+          .jm-sonar-icon {
+            display: inline-block;
+            font-size: 0px;
+            cursor: pointer;
+            margin: 2%;
+            width: 17px;
+            height: 17px;
+            border-radius: 50%;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            color: #fff;
+          }
+
+          .jm-sonar-icon:after {
+            pointer-events: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            content: '';
+            -webkit-box-sizing: content-box;
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
+          }
+
+          .jm-sonar-one .jm-sonar-icon {
+            background: rgba(255, 255, 255, 1);
+            -webkit-transition: -webkit-transform ease-out 0.1s, background 0.2s;
+            -moz-transition: -moz-transform ease-out 0.1s, background 0.2s;
+            transition: transform ease-out 0.1s, background 0.2s;
+            opacity: 0.75;
+          }
+
+          .jm-sonar-one .jm-sonar-icon:after {
+            top: 0;
+            left: 0;
+            padding: 0;
+            z-index: -1;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 1);
+            opacity: 0;
+            -webkit-transform: scale(0.9);
+            -moz-transform: scale(0.9);
+            -ms-transform: scale(0.9);
+            transform: scale(0.9);
+          }
+
+          .jm-sonar-one .jm-sonar-icon:after {
+            -webkit-animation: sonar-one 1.3s ease-out 75ms;
+            -moz-animation: sonar-one 1.3s ease-out 75ms;
+            animation: sonar-one 1.3s ease-out 75ms;
+            -webkit-animation-duration: 5s;
+            -webkit-animation-iteration-count: infinite;
+            -webkit-animation-timing-function: linear;
+            -webkit-animation-delay: 0s;
+          }
+
+          .jm-360-outcards {
+            -webkit-animation: fade-in-cards 1.3s;
+            -moz-animation: fade-in-cards 1.3s;
+            animation: fade-in-cards 1.3s;
+          }
+
+          @-webkit-keyframes fade-in-cards {
+            0% {
+              opacity: 0;
+            }
+            100% {
+              opacity: 1;
+            }
+          }
+
+          @-webkit-keyframes sonar-one {
+            0% {
+              opacity: 0.3;
+            }
+            40% {
+              opacity: 0.5;
+              box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255, 255, 255, 0.5);
+            }
+            100% {
+              box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255, 255, 255, 0.5);
+              -webkit-transform: scale(1.5);
+              opacity: 0;
+            }
+          }
+
+          @-moz-keyframes sonar-one {
+            0% {
+              opacity: 0.3;
+            }
+            40% {
+              opacity: 0.5;
+              box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255, 255, 255, 0.5);
+            }
+            100% {
+              box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255, 255, 255, 0.5);
+              -moz-transform: scale(1.5);
+              opacity: 0;
+            }
+          }
+
+          @keyframes sonar-one {
+            0% {
+              opacity: 0.3;
+            }
+            40% {
+              opacity: 0.5;
+              box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255, 255, 255, 0.5);
+            }
+            100% {
+              box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px 10px #fff, 0 0 0 10px rgba(255, 255, 255, 0.5);
+              transform: scale(1.5);
+              opacity: 0;
+            }
+          }
+
+          .jm-sample-background {
+            padding: 15% 0;
+            background: grey;
+            position: relative;
+          }
+
+          .jm-360-outcards {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.75);
+            /*padding: 1.4% 1.5%;*/
+            text-align: center;
+          }
+
+          article.jm-360-outcards h3 {
+            margin: 0% 0 3%;
+            font-size: 1.4em;
+            letter-spacing: 0.03em;
+            font-weight: normal;
+          }
+
+          article div {
+            position: relative;
+          }
+
+          a.jm-360-info-card-close {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #fff;
+            border: solid 1px #999;
+            border-radius: 50% 50%;
+            color: #333;
+            text-decoration: none;
+            min-width: 20px;
+            min-height: 20px;
+            text-align: center;
+          }
+
+          @media (max-width:1200px) {
+          .jm-sonar-one{
+            display: none;
+          }
+
+          }
+
+
         </style>
     </head>
 <body>
@@ -28,50 +282,77 @@
 <script>
     redondo({
         domeRadius: 50,
+        sensitivityX: -4000,
+        sensitivityY: -3000,
+        twinkleSpeed: 0.01,
         selector: '#heroRenderCanvas',
         background: 'assets/panorama_family_v2_8192.jpg',
-        devTexture: 'assets/dev_512.jpg',
+        glowOptions: {
+          mainTextureRatio: 1,
+          blurTextureSizeRatio: 0.75
+        },
+        glowSize: 4,
         target: {
             x: -1,
             y: 0,
             z: 0
         },
         links: {
-            foo: {
+            woman: {
                 id: "foo",
-                diameter: 1,
+                diameter: window.innerWidth < 1050 ? 2 : 0.8,
+                content: '<h3>Gifts for Him <b>up to 65% off</b></h3><p class="content-block-content__action content-block-content__action--dark-text"><a class="text" href="https://www.c21stores.com/categories/gifts-for-him" target="_blank">SHOP ALL</a></p>',
+                position: {
+                    phi: Math.PI / 2,
+                    theta: Math.PI
+                }
+            },
+            man: {
+                id: "bar",
+                diameter: window.innerWidth < 1050 ? 2 : 0.8,
+                content: '<h3>Gifts for Her <b>up to 65% off</b></h3><p class="content-block-content__action content-block-content__action--dark-text"><a class="text" href="https://www.c21stores.com/categories/gifts-for-her" target="_blank">SHOP ALL</a></p>',
+                position: {
+                    phi: Math.PI / 2,
+                    theta: Math.PI / 2
+                },
+                alpha: 0.55
+            },
+            boy: {
+                id: "bar",
+                diameter: window.innerWidth < 1050 ? 2 : 0.8,
+                content: '<h3>Gifts for Boys <b>up to 65% off</b></h3><p class="content-block-content__action content-block-content__action--dark-text"><a class="text" href="https://www.c21stores.com/categories/gifts-for-her" target="_blank">SHOP ALL</a></p>',
+                position: {
+                    phi: Math.PI / 2,
+                    theta: 0
+                }
+            },
+            girl: {
+                id: "bar",
+                diameter: window.innerWidth < 1050 ? 2 : 0.8,
+                content: '<h3>Gifts for Girls <b>up to 65% off</b></h3><p class="content-block-content__action content-block-content__action--dark-text"><a class="text" href="https://www.c21stores.com/categories/gifts-for-her" target="_blank">SHOP ALL</a></p>',
+                position: {
+                    phi: Math.PI / 2,
+                    theta: (3 * Math.PI) / 2
+                }
+            },
+            ceiling: {
+                id: "bar",
+                diameter: window.innerWidth < 1050 ? 2 : 0.8,
+                content: '<h3>CEILING <b>up to 65% off</b></h3><p class="content-block-content__action content-block-content__action--dark-text"><a class="text" href="https://www.c21stores.com/categories/gifts-for-her" target="_blank">SHOP ALL</a></p>',
                 position: {
                     phi: 0,
                     theta: 0
                 }
             },
-            // bar: {
-            //     id: "bar",
-            //     diameter: 5,
-            //     position: {
-            //         x: -100,
-            //         y: 1,
-            //         z: 100
-            //     }
-            // },
-            // baz: {
-            //     id: "baz",
-            //     diameter: 5,
-            //     position: {
-            //         x: 100,
-            //         y: 1,
-            //         z: -100
-            //     }
-            // },
-            // qux: {
-            //     id: "qux",
-            //     diameter: 5,
-            //     position: {
-            //         x: -100,
-            //         y: 1,
-            //         z: -100
-            //     }
-            // }
+            floor: {
+                id: "bar",
+                diameter: window.innerWidth < 1050 ? 2 : 0.8,
+                content: '<h3>FLOOR <b>up to 65% off</b></h3><p class="content-block-content__action content-block-content__action--dark-text"><a class="text" href="https://www.c21stores.com/categories/gifts-for-her" target="_blank">SHOP ALL</a></p>',
+                position: {
+                    phi: Math.PI,
+                    theta: Math.PI
+                }
+            }
         }
     });
 </script>
