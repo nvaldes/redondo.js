@@ -27,52 +27,52 @@
 <script src="dist/bundle.js"></script>
 <script>
     redondo({
+        domeRadius: 50,
         selector: '#heroRenderCanvas',
         background: 'assets/panorama_family_v2_8192.jpg',
         devTexture: 'assets/dev_512.jpg',
         target: {
-            x: -0.01,
+            x: -1,
             y: 0,
             z: 0
         },
-        links: [
-            {
+        links: {
+            foo: {
                 id: "foo",
-                diameter: 5,
+                diameter: 1,
                 position: {
-                    x: 100,
-                    y: 1,
-                    z: 100
+                    phi: 0,
+                    theta: 0
                 }
             },
-            {
-                id: "bar",
-                diameter: 5,
-                position: {
-                    x: -100,
-                    y: 1,
-                    z: 100
-                }
-            },
-            {
-                id: "baz",
-                diameter: 5,
-                position: {
-                    x: 100,
-                    y: 1,
-                    z: -100
-                }
-            },
-            {
-                id: "qux",
-                diameter: 5,
-                position: {
-                    x: -100,
-                    y: 1,
-                    z: -100
-                }
-            }
-        ]
+            // bar: {
+            //     id: "bar",
+            //     diameter: 5,
+            //     position: {
+            //         x: -100,
+            //         y: 1,
+            //         z: 100
+            //     }
+            // },
+            // baz: {
+            //     id: "baz",
+            //     diameter: 5,
+            //     position: {
+            //         x: 100,
+            //         y: 1,
+            //         z: -100
+            //     }
+            // },
+            // qux: {
+            //     id: "qux",
+            //     diameter: 5,
+            //     position: {
+            //         x: -100,
+            //         y: 1,
+            //         z: -100
+            //     }
+            // }
+        }
     });
 </script>
 </body>

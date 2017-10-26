@@ -114,8 +114,10 @@ window.redondo = function(config) {
     scene.dragging = false;
 
     // Create camera
+    // var camera = new BABYLON.UniversalCamera("UniversalCamera", new BABYLON.Vector3(config.target.x, config.target.y, config.target.z), scene);
     var camera = new __WEBPACK_IMPORTED_MODULE_1_babylonjs___default.a.ArcRotateCamera("Cam_Base", 0.01, 0, 0, new __WEBPACK_IMPORTED_MODULE_1_babylonjs___default.a.Vector3(config.target.x, config.target.y, config.target.z), scene);
     camera.setPosition(new __WEBPACK_IMPORTED_MODULE_1_babylonjs___default.a.Vector3.Zero());
+    window.camera = camera;
     camera.fov = scene.zoomState;
     camera.lowerRadiusLimit = 0.02;
     camera.upperRadiusLimit = 0.01;
@@ -126,7 +128,7 @@ window.redondo = function(config) {
     scene.activeCamera.attachControl(canvas, true);
 
     // Create meshes
-    var dome = __WEBPACK_IMPORTED_MODULE_1_babylonjs___default.a.Mesh.CreateSphere('Dome', 64, 2000, scene);
+    var dome = __WEBPACK_IMPORTED_MODULE_1_babylonjs___default.a.MeshBuilder.CreateSphere('Dome', {diameter: config.domeRadius * 2}, scene);
     dome.actionManager = new __WEBPACK_IMPORTED_MODULE_1_babylonjs___default.a.ActionManager(scene);
     dome.actionManager.registerAction(new __WEBPACK_IMPORTED_MODULE_1_babylonjs___default.a.ExecuteCodeAction(__WEBPACK_IMPORTED_MODULE_1_babylonjs___default.a.ActionManager.OnPickTrigger, function() {
       scene.pause = !scene.pause;
@@ -160,19 +162,25 @@ window.redondo = function(config) {
     dev_mat.backFaceCulling = false;
     dev_mat.alpha = 0.55;
 
-    for (var i = 0; i < config.links.length; i++) {
-      var mesh = __WEBPACK_IMPORTED_MODULE_1_babylonjs___default.a.MeshBuilder.CreateSphere(config.links[i].id, {
-        diameter: config.links[i].diameter,
+    var linkNames = Object.keys(config.links);
+
+    for (var i = 0; i < linkNames.length; i++) {
+      var curr = config.links[linkNames[i]];
+      var mesh = __WEBPACK_IMPORTED_MODULE_1_babylonjs___default.a.MeshBuilder.CreateSphere(linkNames[i], {
+        diameter: curr.diameter,
         sideOrientation: __WEBPACK_IMPORTED_MODULE_1_babylonjs___default.a.Mesh.DOUBLESIDE
       }, scene);
       mesh.actionManager = new __WEBPACK_IMPORTED_MODULE_1_babylonjs___default.a.ActionManager(scene);
       mesh.actionManager.registerAction(new __WEBPACK_IMPORTED_MODULE_1_babylonjs___default.a.ExecuteCodeAction(__WEBPACK_IMPORTED_MODULE_1_babylonjs___default.a.ActionManager.OnPickTrigger, function(e) {
-        alert(e.source.name);
+        alert(config.links[e.source.name].content);
       }));
       mesh.material = dev_mat;
-      mesh.position.x = config.links[i].position.x;
-      mesh.position.y = config.links[i].position.y;
-      mesh.position.z = config.links[i].position.z;
+      // debugger;
+      // mesh.position = new BABYLON.Vector3(50, 0, 50);
+      mesh.position.x = config.domeRadius * Math.sin(curr.position.phi) * Math.cos(curr.position.theta);
+      mesh.position.y = config.domeRadius * Math.sin(curr.position.phi) * Math.sin(curr.position.theta);
+      mesh.position.z = config.domeRadius * Math.cos(curr.position.phi);
+      window.sampleMesh = mesh;
     }
     return scene;
   };
@@ -180,7 +188,7 @@ window.redondo = function(config) {
   var scene = createScene();
 
   engine.runRenderLoop(function() {
-    scene.activeCamera.alpha -= (0.000125 * scene.activeCamera.fov * scene.pause);
+    scene.activeCamera.alpha -= (0.0002 * scene.activeCamera.fov * scene.pause);
     if (scene.zoomState > scene.activeCamera.fov.toFixed(2)) {
       scene.activeCamera.fov += scene.zoomSpeed;
       scene.activeCamera.angularSensibilityX = (3000 / scene.activeCamera.fov);
