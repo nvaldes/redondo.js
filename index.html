@@ -29,7 +29,50 @@
     redondo({
         selector: '#heroRenderCanvas',
         background: 'assets/panorama_family_v2_8192.jpg',
-        devTexture: 'assets/dev_512.jpg'
+        devTexture: 'assets/dev_512.jpg',
+        target: {
+            x: -0.01,
+            y: 0,
+            z: 0
+        },
+        links: [
+            {
+                id: "foo",
+                diameter: 5,
+                position: {
+                    x: 100,
+                    y: 1,
+                    z: 100
+                }
+            },
+            {
+                id: "bar",
+                diameter: 5,
+                position: {
+                    x: -100,
+                    y: 1,
+                    z: 100
+                }
+            },
+            {
+                id: "baz",
+                diameter: 5,
+                position: {
+                    x: 100,
+                    y: 1,
+                    z: -100
+                }
+            },
+            {
+                id: "qux",
+                diameter: 5,
+                position: {
+                    x: -100,
+                    y: 1,
+                    z: -100
+                }
+            }
+        ]
     });
 </script>
 </body>
