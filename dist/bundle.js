@@ -79,6 +79,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+class C21LoadingScreen {
+  //init the loader
+  constructor(text) {
+    this.loadingUIText = text;
+  }
+  displayLoadingUI() {
+    if (document.getElementById('redondo_loading') !== null) {
+      return;
+    }
+    var loading = document.createElement('div');
+    loading.id = 'redondo_loading';
+    var icon = document.createElement('img');
+    icon.id = 'redondo_icon';
+    icon.src = 'https://c21stores-weblinc.netdna-ssl.com/media/W1siZiIsIjIwMTcvMTAvMDUvMTMvMDIvNDgvMzcvMzYwX2ljb25fMl8ucG5nIl1d/360_icon%5B2%5D.png?sha=c263947ff57ef86a';
+    var progress = document.createElement('img');
+    progress.id = 'redondo_loading-progress';
+    progress.src = 'https://c21stores-weblinc.netdna-ssl.com/media/W1siZiIsIjIwMTcvMTAvMjcvMTAvNTEvMzgvODk3L0VjbGlwc2UuZ2lmIl1d/Eclipse.gif?sha=7e3884a0c719f01d';
+    loading.appendChild(progress);
+    var dest = document.getElementById('heroCanvasZone')
+    dest.appendChild(loading);
+    dest.appendChild(icon);
+  }
+  hideLoadingUI() {
+    var loading = document.getElementById('redondo_loading');
+    var icon = document.getElementById('redondo_icon');
+    icon.style.top = '6px';
+    icon.style.right = '6px';
+    icon.style.width = '74px';
+    icon.style.opacity = '0.7';
+    loading.style.opacity = '0';
+    setTimeout(() => {
+      loading.remove();
+    }, 1000);
+  }
+}
+
 window.redondo = function(config) {
   window.redondo.killAllCards = function() {
     document.querySelectorAll('.jm-360-outcards').forEach(function(e) {
@@ -101,6 +137,12 @@ window.redondo = function(config) {
 
     // Create Assets Manager
     var assetsManager = new __WEBPACK_IMPORTED_MODULE_1_babylonjs___default.a.AssetsManager(scene);
+
+    if (window.innerWidth < 1050) {
+      assetsManager.useDefaultLoadingScreen = false;
+    } else {
+      engine.loadingScreen = new C21LoadingScreen('Loading...');
+    }
 
     // Create camera
     // var camera = new BABYLON.UniversalCamera("UniversalCamera", new BABYLON.Vector3(config.target.x, config.target.y, config.target.z), scene);
@@ -151,14 +193,16 @@ window.redondo = function(config) {
     //     dev_texture = task.texture;
     //   }
     // }
-    var glow = [
-      new __WEBPACK_IMPORTED_MODULE_1_babylonjs___default.a.HighlightLayer('glow0', scene, config.glowOptions),
-      new __WEBPACK_IMPORTED_MODULE_1_babylonjs___default.a.HighlightLayer('glow1', scene, config.glowOptions),
-      new __WEBPACK_IMPORTED_MODULE_1_babylonjs___default.a.HighlightLayer('glow2', scene, config.glowOptions)
-    ];
-    glow.forEach((e) => {
-      e.innerGlow = false;
-    });
+    var glow = [];
+    for (var i = 0; i < config.halos.length; i++) {
+      var curr = new __WEBPACK_IMPORTED_MODULE_1_babylonjs___default.a.HighlightLayer('glow' + i, scene, config.halos[i].options);
+      curr.innerGlow = config.halos[i].innerGlow;
+      curr.outerGlow = config.halos[i].outerGlow;
+      glow.push({
+        glow: curr,
+        color: config.halos[i].color
+      });
+    }
     var alpha = 0;
     scene.registerBeforeRender(() => {
         alpha += config.twinkleSpeed;
@@ -166,8 +210,8 @@ window.redondo = function(config) {
           alpha -= Math.PI
         }
         glow.forEach((e) => {
-          e.blurHorizontalSize = Math.sin(alpha) * config.glowSize;
-          e.blurVerticalSize = Math.sin(alpha) * config.glowSize;
+          e.glow.blurHorizontalSize = Math.sin(alpha) * config.glowSize;
+          e.glow.blurVerticalSize = Math.sin(alpha) * config.glowSize;
         });
     });
 
@@ -175,9 +219,6 @@ window.redondo = function(config) {
     window.meshes = [];
     for (var i = 0; i < linkNames.length; i++) {
       var curr = config.links[linkNames[i]];
-      if (curr.alpha == 0) {
-        continue;
-      }
       var mesh = __WEBPACK_IMPORTED_MODULE_1_babylonjs___default.a.MeshBuilder.CreateSphere(linkNames[i], {
         diameter: curr.diameter,
         sideOrientation: __WEBPACK_IMPORTED_MODULE_1_babylonjs___default.a.Mesh.DOUBLESIDE
@@ -212,9 +253,11 @@ window.redondo = function(config) {
       mesh.position.x = (config.domeRadius - curr.diameter) * Math.sin(curr.position.phi) * Math.cos(curr.position.theta);
       mesh.position.y = (config.domeRadius - curr.diameter) * Math.cos(curr.position.phi);
       mesh.position.z = (config.domeRadius - curr.diameter) * Math.sin(curr.position.phi) * Math.sin(curr.position.theta);
-      glow.forEach((e) => {
-        e.addMesh(mesh, __WEBPACK_IMPORTED_MODULE_1_babylonjs___default.a.Color3.White());
-      });
+      if (curr.alpha > 0) {
+        glow.forEach((e) => {
+          e.glow.addMesh(mesh, __WEBPACK_IMPORTED_MODULE_1_babylonjs___default.a.Color3.White());
+        });
+      }
       window.meshes.push(mesh);
 
       assetsManager.load();
